@@ -9,8 +9,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 dependencies {
-    implementation(project(":core:domain"))
     implementation(project(":core:model"))
-
-    implementation(libs.javax.inject)
+    implementation(project(":core:network"))
 }
