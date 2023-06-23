@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.navigation.NavigationBarView
+import dagger.hilt.android.AndroidEntryPoint
 import org.hxl.common.base.BaseFragment
 import org.hxl.navigator.databinding.FragmentNavigatorBinding
 
+@AndroidEntryPoint
 class NavigatorFragment: BaseFragment<FragmentNavigatorBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
