@@ -5,4 +5,10 @@
             @style/ShapeAppearance.Material3.Corner.None
         </item>
     </style>
+
+    <style name="ForceFacts.Bookmark" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/favorite_colors</item>
+        <item name="android:background">@drawable/favorite_background</item>
+    </style>
+
 </resources>

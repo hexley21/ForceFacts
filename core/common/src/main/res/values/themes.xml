@@ -30,6 +30,10 @@
         <item name="statusBarColor">@color/md_theme_light_background</item>
         <item name="backgroundColor">@color/md_theme_light_background</item>
 
+        <item name="favorite">@color/favorite_light</item>
+        <item name="favorite_ripple">@color/favorite_light_ripple</item>
+        <item name="background_ripple">@color/background_light_ripple</item>
+
         <item name="android:statusBarColor">?attr/statusBarColor</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">@color/md_theme_light_background</item>

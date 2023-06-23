@@ -61,4 +61,11 @@
     <color name="md_theme_dark_onSurface">#C5C6C9</color>
     <color name="md_theme_dark_surfaceVariant">#41484D</color>
     <color name="md_theme_dark_onSurfaceVariant">#C1C7CE</color>
+
+    <color name="favorite_light">#FBC02D</color>
+    <color name="favorite_dark">#FFF176</color>
+    <color name="favorite_light_ripple">#42FBC02D</color>
+    <color name="favorite_dark_ripple">#42FFF176</color>
+    <color name="background_light_ripple">#42191C1E</color>
+    <color name="background_dark_ripple">#42E2E2E5</color>
 </resources>
