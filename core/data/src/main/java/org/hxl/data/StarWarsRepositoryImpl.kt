@@ -12,15 +12,15 @@ class StarWarsRepositoryImpl @Inject constructor(
     private val local: StarWarsLocal
 ): StarWarsRepository {
     override suspend fun getCharacters(page: Int): List<Character> {
-        TODO("Not yet implemented")
+        return remote.getCharacters(page)
     }
 
     override suspend fun getCharacterById(id: Int): Character {
-        TODO("Not yet implemented")
+        return remote.getCharacterById(id)
     }
 
     override suspend fun searchCharacters(query: String, page: Int): List<Character> {
-        TODO("Not yet implemented")
+        return remote.searchCharacters(query, page)
     }
 
     override suspend fun favoriteCharacter(id: String) {
@@ -36,15 +36,15 @@ class StarWarsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getStarShips(page: Int): List<StarShip> {
-        TODO("Not yet implemented")
+        return remote.getStarShips(page)
     }
 
     override suspend fun getStarShipById(id: Int): StarShip {
-        TODO("Not yet implemented")
+        return remote.getStarShipById(id)
     }
 
     override suspend fun searchStarShips(query: String, page: Int): List<StarShip> {
-        TODO("Not yet implemented")
+        return remote.searchStarShips(query, page)
     }
 
     override suspend fun favoriteStarShip(id: String) {
