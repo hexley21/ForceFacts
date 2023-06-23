@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import org.hxl.common.R
@@ -16,12 +18,18 @@ class DiscoverFragment: BaseFragment<FragmentDiscoverBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.listPager.adapter = DiscoverStateAdapter(this)
-        binding.listPager.isUserInputEnabled = false
+
+        attachTabMediator(binding.listTabs, binding.listPager)
+        attachTabMediator(binding.searchListTabs, binding.searchListPager)
+    }
+
+    private fun attachTabMediator(tabLayout: TabLayout, pager: ViewPager2) {
+        pager.adapter = DiscoverStateAdapter(this)
+        pager.isUserInputEnabled = false
 
         TabLayoutMediator(
-            binding.listTabs,
-            binding.listPager,
+            tabLayout,
+            pager,
             true,
             true,
         ) { tab, position ->
