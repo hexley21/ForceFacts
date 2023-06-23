@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable name="character" type="org.hxl.model.Character" />
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,24 +28,49 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/distance_small"
+                    android:text='@{character.name + ": " + character.gender}'
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                     tools:text="Name: gender" />
 
                 <TextView
-                    android:id="@+id/tv_ships"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Star Ships: 123"
+                    android:text='@{@string/starships(character.starships)}'
+                    tools:text="Star ships: 123"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+                <TextView
+                    android:visibility="@{character.films.empty ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/movies(character.films.size())}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    tools:text="Movies: 123, 456, 678" />
+
+                <TextView
+                    android:visibility="@{character.films.empty ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/director(character.films.size())}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    tools:text="Director: 123, 456" />
+
+                <TextView
+                    android:visibility="@{character.films.empty ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/producer(character.films.size())}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    tools:text="Producer: 123, 456" />
             </LinearLayout>
 
             <CheckBox
                 android:id="@+id/cb_favorite"
                 style="@style/ForceFacts.Bookmark"
+                android:checked="@{character.isBookmarked}"
                 android:layout_width="@dimen/icon_default"
                 android:layout_height="match_parent"
                 android:button="@drawable/sl_favorite" />

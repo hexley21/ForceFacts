@@ -1,13 +1,34 @@
 package org.hxl.discover
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import org.hxl.common.R
 import org.hxl.common.base.BaseFragment
 import org.hxl.discover.databinding.FragmentDiscoverBinding
+import org.hxl.discover.menu.DiscoverStateAdapter
 
 @AndroidEntryPoint
 class DiscoverFragment: BaseFragment<FragmentDiscoverBinding>() {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.listPager.adapter = DiscoverStateAdapter(this)
+        binding.listPager.isUserInputEnabled = false
+
+        TabLayoutMediator(
+            binding.listTabs,
+            binding.listPager,
+            true,
+            true,
+        ) { tab, position ->
+            if (position == 0) tab.setText(requireContext().getString(R.string.characters))
+            else tab.setText(requireContext().getString(R.string.star_ships))
+        }.attach()
+    }
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?

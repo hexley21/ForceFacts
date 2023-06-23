@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable name="starship" type="org.hxl.model.StarShip" />
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,26 +28,49 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/distance_small"
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:text='@{starship.name + ": " + starship.model}'
                     tools:text="Name: model" />
 
                 <TextView
-                    android:id="@+id/tv_manufacturer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{@string/manufacturer(starship.manufacturer)}"
                     tools:text="Manufacturer: X"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
                 <TextView
-                    android:id="@+id/tv_passengers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{@string/passengers(starship.passengers)}"
                     tools:text="Passengers: 123"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+                <TextView
+                    android:visibility="@{starship.films.empty ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/movies(starship.films.size())}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    tools:text="Movies: 123, 456, 678" />
+
+                <TextView
+                    android:visibility="@{starship.films.empty ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/director(starship.films.size())}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    tools:text="Director: 123, 456" />
+
+                <TextView
+                    android:visibility="@{starship.films.empty ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/producer(starship.films.size())}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    tools:text="Producer: 123, 456" />
             </LinearLayout>
 
             <CheckBox

@@ -9,6 +9,12 @@
         android:background="?attr/colorSurface"
         android:orientation="vertical">
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/list_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -89,7 +95,7 @@
                     android:layout_height="1dp"
                     android:background="?android:attr/listDivider" />
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/list_pager"
+                    android:id="@+id/search_list_pager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
