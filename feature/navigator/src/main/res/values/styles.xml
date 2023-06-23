@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CineScope.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:color">?attr/colorSurfaceVariant</item>
+        <item name="itemActiveIndicatorStyle">@style/CineScope.BottomNavigation.Active</item>
+        <item name="itemRippleColor">@color/navbar</item>
+    </style>
+
+    <style name="CineScope.BottomNavigation.Active" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">?attr/colorSurfaceVariant</item>
+    </style>
+</resources>

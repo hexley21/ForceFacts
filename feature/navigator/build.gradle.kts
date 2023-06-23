@@ -1,22 +1,19 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.kotlinKapt)
 }
 
 android {
-    namespace = "org.hxl.forcefacts"
+    namespace = "org.hxl.navigator"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "org.hxl.forcefacts"
         minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0-alpha.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildFeatures {
@@ -43,15 +40,10 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
-    implementation(project(":core:data"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:model"))
-    implementation(project(":feature:navigator"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
