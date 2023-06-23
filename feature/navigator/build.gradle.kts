@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
+    implementation(project(":feature:discover"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

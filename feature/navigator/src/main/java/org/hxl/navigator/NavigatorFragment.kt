@@ -31,7 +31,7 @@ class NavigatorFragment: BaseFragment<FragmentNavigatorBinding>() {
                 // TODO: Implement menu_favorites navigation
             }
             else -> {
-                // TODO: Implement menu_discover navigation
+                findNavController().navigate(org.hxl.discover.R.id.nav_discover)
             }
         }
         return true

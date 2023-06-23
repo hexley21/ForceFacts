@@ -47,6 +47,7 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:model"))
     implementation(project(":feature:navigator"))
+    implementation(project(":feature:discover"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

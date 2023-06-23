@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_relay"
-    app:startDestination="@id/placeholder">
+    app:startDestination="@id/nav_discover">
 
-    <fragment android:id="@+id/placeholder" />
+    <include app:graph="@navigation/nav_discover" />
 </navigation>
