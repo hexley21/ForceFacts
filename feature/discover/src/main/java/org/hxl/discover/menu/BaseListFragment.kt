@@ -12,7 +12,8 @@ import org.hxl.discover.databinding.StarwarsListBinding
 import java.net.UnknownHostException
 
 abstract class BaseListFragment<T: Any, VM: BaseListViewModel<T>>: BaseFragmentVM<StarwarsListBinding, VM>() {
-    abstract val listAdapter: BasePagingAdapter<T, *>
+    protected lateinit var listAdapter: BasePagingAdapter<T, *>
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvStarwarsList.adapter = listAdapter

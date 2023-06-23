@@ -1,5 +1,6 @@
 package org.hxl.discover.menu.charcater
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -11,6 +12,12 @@ import org.hxl.model.Character
 
 @AndroidEntryPoint
 class CharacterListFragmentSearch : BaseListFragment<Character, CharacterListViewModel>() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        listAdapter = CharacterListAdapter()
+    }
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -21,5 +28,4 @@ class CharacterListFragmentSearch : BaseListFragment<Character, CharacterListVie
     override val vm: CharacterListViewModel  by viewModels(
         ownerProducer = { requireParentFragment() }
     )
-    override val listAdapter: BasePagingAdapter<Character, *> = CharacterListAdapter()
 }

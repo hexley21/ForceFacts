@@ -23,10 +23,17 @@ class DiscoverFragment: BaseFragment<FragmentDiscoverBinding>() {
     private val searchCharacterVm: CharacterListViewModel by viewModels()
     private val searchStarShipVm: StarShipListViewModel by viewModels()
 
+    private lateinit var pagerAdapter: DiscoverStateAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        pagerAdapter = DiscoverStateAdapter(this)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.listPager.adapter = DiscoverStateAdapter(this)
+        binding.listPager.adapter = pagerAdapter
         binding.listPager.isUserInputEnabled = false
 
         attachTabMediator(binding.listTabs, binding.listPager)

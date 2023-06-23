@@ -1,5 +1,6 @@
 package org.hxl.discover.menu.starship
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -11,6 +12,11 @@ import org.hxl.model.StarShip
 
 @AndroidEntryPoint
 class StarShipListFragmentSearch : BaseListFragment<StarShip, StarShipListViewModel>() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        listAdapter = StarShipListAdapter()
+    }
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -21,5 +27,4 @@ class StarShipListFragmentSearch : BaseListFragment<StarShip, StarShipListViewMo
     override val vm: StarShipListViewModel  by viewModels(
         ownerProducer = { requireParentFragment() }
     )
-    override val listAdapter: BasePagingAdapter<StarShip, *> = StarShipListAdapter()
 }
