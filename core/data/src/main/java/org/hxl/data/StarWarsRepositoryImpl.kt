@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class StarWarsRepositoryImpl @Inject constructor(
     private val remote: StarWarsRemote,
-    private val local: StarWarsLocal
+    private val local: StarWarsLocal? = null
 ): StarWarsRepository {
     override suspend fun getCharacters(page: Int): List<Character> {
         return remote.getCharacters(page)
