@@ -43,14 +43,14 @@ abstract class BaseListViewModel<T: Any>(private val getData: suspend (query: St
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun updateListFlow() {
-        listFlow = searchQueryFlow.flatMapLatest { query ->
-            searchQuery = query
+        listFlow = searchQueryFlow.flatMapLatest {
+            searchQuery = it
             createOrGetPager().flow.cachedIn(viewModelScope)
         }
     }
 
     fun submitSearch(query: String) {
-        searchQuery = query
+        searchQueryFlow.value = query
         updateListFlow()
     }
 }

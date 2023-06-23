@@ -1,8 +1,6 @@
 package org.hxl.discover
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +20,6 @@ import org.hxl.discover.menu.starship.StarShipListViewModel
 
 @AndroidEntryPoint
 class DiscoverFragment: BaseFragment<FragmentDiscoverBinding>() {
-    companion object {
-        const val TAG = "DiscoverFragment"
-    }
     private val searchCharacterVm: CharacterListViewModel by viewModels()
     private val searchStarShipVm: StarShipListViewModel by viewModels()
 
@@ -53,8 +48,6 @@ class DiscoverFragment: BaseFragment<FragmentDiscoverBinding>() {
                 }
             }
         )
-
-
     }
 
     private fun submitSearch(query: String) {
