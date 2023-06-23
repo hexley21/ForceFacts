@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="character" type="org.hxl.model.Character" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_small"
+        android:layout_marginBottom="@dimen/distance_small"
+        app:cardBackgroundColor="?attr/backgroundColor"
+        app:contentPadding="@dimen/distance_default">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/distance_small"
+                    android:text='@{character.name + ": " + character.gender}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    tools:text="Name: gender" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/starships(character.starships)}'
+                    tools:text="Star ships: 123"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+                <TextView
+                    android:visibility="@{character.films.empty ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/movies(character.films.size())}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    tools:text="Movies: 123, 456, 678" />
+
+                <TextView
+                    android:visibility="@{character.films.empty ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/director(character.films.size())}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    tools:text="Director: 123, 456" />
+
+                <TextView
+                    android:visibility="@{character.films.empty ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{@string/producer(character.films.size())}'
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    tools:text="Producer: 123, 456" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/cb_favorite"
+                style="@style/ForceFacts.Bookmark"
+                android:checked="@{character.isBookmarked}"
+                android:layout_width="@dimen/icon_default"
+                android:layout_height="match_parent"
+                android:button="@drawable/sl_favorite" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

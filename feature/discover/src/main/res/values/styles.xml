@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ForceFacts.SearchBar" parent="Widget.Material3.SearchBar">
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearance.Material3.Corner.None
+        </item>
+    </style>
+
+    <style name="ForceFacts.Bookmark" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/favorite_colors</item>
+        <item name="android:background">@drawable/favorite_background</item>
+    </style>
+
+</resources>

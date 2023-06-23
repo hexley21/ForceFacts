@@ -2,4 +2,8 @@
 <resources>
     <attr name="statusBarColor" format="color"/>
     <attr name="backgroundColor" format="color" />
+
+    <attr name="favorite" format="color" />
+    <attr name="favorite_ripple" format="color"/>
+    <attr name="background_ripple" format="color"/>
 </resources>
