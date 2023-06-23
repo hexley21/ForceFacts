@@ -21,7 +21,7 @@ data class StarShipDTO(
     @Json(name = "crew")
     val crew: String?,
     @Json(name = "passengers")
-    val passengers: String?,
+    val passengers: String,
     @Json(name = "cargo_capacity")
     val cargoCapacity: String?,
     @Json(name = "consumables")

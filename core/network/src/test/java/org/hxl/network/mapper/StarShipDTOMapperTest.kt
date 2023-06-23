@@ -18,7 +18,7 @@ class StarShipDTOMapperTest {
         length = "34.37",
         maxAtmospheringSpeed = "1050",
         crew = "4",
-        passengers = "6",
+        passengers = "6.0",
         cargoCapacity = "100000",
         consumables = "2 months",
         hyperdriveRating = "0.5",
@@ -35,7 +35,7 @@ class StarShipDTOMapperTest {
         name = "Millennium Falcon",
         model = "YT-1300 light freighter",
         manufacturer = "Corellian Engineering Corporation",
-        passengers = 6.0,
+        passengers = "6.0",
     )
 
     @Test
@@ -46,7 +46,7 @@ class StarShipDTOMapperTest {
         assertEquals(fakeModel.name, converted.name)
         assertEquals(fakeModel.model, converted.model)
         assertEquals(fakeModel.manufacturer, converted.manufacturer)
-        assertEquals(fakeModel.passengers, converted.passengers, 0.0)
+        assertEquals(fakeModel.passengers, converted.passengers)
         assertEquals(fakeModel.films.size, converted.films.size)
     }
 

@@ -8,6 +8,6 @@ fun StarShipDTO.mapToModel(): StarShip {
         name,
         model,
         manufacturer,
-        passengers?.toDouble() ?: 0.0
+        passengers
     )
 }

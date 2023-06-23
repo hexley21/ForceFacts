@@ -7,5 +7,5 @@
     <string name="director">Director: %s</string>
 
     <string name="manufacturer">Manufacturer: %s</string>
-    <string name="passengers">Passengers: %f</string>
+    <string name="passengers">Passengers: %s</string>
 </resources>
