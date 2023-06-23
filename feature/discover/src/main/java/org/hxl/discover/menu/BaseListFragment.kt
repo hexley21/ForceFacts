@@ -19,10 +19,13 @@ abstract class BaseListFragment<T: Any, VM: BaseListViewModel<T>>: BaseFragmentV
 
         lifecycleScope.launch {
             listAdapter.addLoadStateListener{
-//                if (it.refresh is LoadState.Loading) {
+                if (it.refresh is LoadState.Loading) {
+                    if (binding.pbMiddle.visibility == View.GONE) {
+                        binding.pbTop.visibility = View.VISIBLE
+                    }
 //                    EspressoIdlingResource.increment();
-//                }
-                if (it.refresh is LoadState.NotLoading) {
+                }
+                else if (it.refresh is LoadState.NotLoading) {
 
                     hideError()
                     hideLoading()
@@ -44,17 +47,20 @@ abstract class BaseListFragment<T: Any, VM: BaseListViewModel<T>>: BaseFragmentV
 
     }
 
-    protected fun refresh() {
+    fun submitSearch(query: String) {
+        vm.submitSearch(query)
+    }
+    private fun refresh() {
         listAdapter.refresh()
     }
 
-    protected fun hideError() {
+    private fun hideError() {
         binding.imgError.visibility = View.GONE
         binding.tvError.visibility = View.GONE
         binding.srlStarwars.isRefreshing = false
     }
 
-    protected fun showError(e: Throwable) {
+    private fun showError(e: Throwable) {
         if (listAdapter.itemCount == 0) {
             if (e is UnknownHostException) {
                 binding.error = Exception("No internet connection…")
@@ -74,7 +80,8 @@ abstract class BaseListFragment<T: Any, VM: BaseListViewModel<T>>: BaseFragmentV
         binding.srlStarwars.isRefreshing = false
     }
 
-    protected fun hideLoading() {
-        binding.progressBar.visibility = View.GONE
+    private fun hideLoading() {
+        binding.pbTop.visibility = View.GONE
+        binding.pbMiddle.visibility = View.GONE
     }
 }

@@ -1,5 +1,6 @@
 package org.hxl.discover.menu
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -47,10 +48,5 @@ abstract class BaseListViewModel<T: Any>(private val getData: suspend (query: St
             searchQuery = query
             createOrGetPager().flow.cachedIn(viewModelScope)
         }
-    }
-
-    fun submitSearch(query: String) {
-        searchQueryFlow.value = query
-        updateListFlow()
     }
 }
