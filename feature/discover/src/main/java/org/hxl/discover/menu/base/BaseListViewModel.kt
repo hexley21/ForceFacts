@@ -11,10 +11,16 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.hxl.discover.menu.ListDataPaging
+import org.hxl.domain.usecase.FavoriteUseCase
+import org.hxl.domain.usecase.ModelUseCase
 
-abstract class BaseListViewModel<T: Any>(private val getData: suspend (query: String, page: Int) -> List<T>): ViewModel() {
+abstract class BaseListViewModel<T: Any>(
+    private val modelUseCase: ModelUseCase<T>,
+    private val favoriteUseCase: FavoriteUseCase<T>,
+): ViewModel() {
     private var searchQuery: String = ""
     private var pager: Pager<Int, T>? = null
 
@@ -38,7 +44,7 @@ abstract class BaseListViewModel<T: Any>(private val getData: suspend (query: St
             ) {
                 ListDataPaging {
                     withContext(Dispatchers.IO) {
-                        getData(searchQuery, it)
+                        modelUseCase.search(searchQuery, it)
                     }
                 }
             }
@@ -57,5 +63,17 @@ abstract class BaseListViewModel<T: Any>(private val getData: suspend (query: St
     fun submitSearch(query: String) {
         searchQueryFlow.value = query
         updateListFlow()
+    }
+
+    fun favorite(isAdd: Boolean, id: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                if (isAdd) {
+                    favoriteUseCase.favorite(id)
+                } else {
+                    favoriteUseCase.unFavorite(id)
+                }
+            }
+        }
     }
 }

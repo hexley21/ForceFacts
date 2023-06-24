@@ -1,18 +1,19 @@
-package org.hxl.favorite.menu.character
+package org.hxl.discover.menu.charcater.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import org.hxl.common.base.BaseAdapter
+import org.hxl.common.base.BasePagingAdapter
 import org.hxl.common.callback.CharacterItemCallBack
 import org.hxl.discover.databinding.CharacterItemBinding
-import org.hxl.discover.menu.charcater.adapter.CharacterViewHolder
 import org.hxl.model.Character
 
-class CharacterFavAdapter(
+class CharacterListAdapter(
     private val favLogic: (isAdd: Boolean, id: Int) -> Unit
-): BaseAdapter<Character, CharacterViewHolder>(CharacterItemCallBack) {
+): BasePagingAdapter<Character, CharacterViewHolder>(CharacterItemCallBack) {
+
     override fun getViewHolder(parent: ViewGroup?, viewType: Int): CharacterViewHolder {
-        val binding = CharacterItemBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
+        val binding: CharacterItemBinding = CharacterItemBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
         return CharacterViewHolder(favLogic, binding)
     }
+
 }

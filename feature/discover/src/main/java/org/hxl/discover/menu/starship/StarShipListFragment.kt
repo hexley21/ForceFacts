@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.hxl.discover.databinding.StarwarsListBinding
 import org.hxl.discover.menu.base.BaseListFragment
+import org.hxl.discover.menu.starship.adapter.StarShipListAdapter
 import org.hxl.model.StarShip
 
 @AndroidEntryPoint

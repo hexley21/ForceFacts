@@ -1,8 +1,27 @@
 package org.hxl.favorite.menu.base
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.hxl.domain.usecase.FavoriteUseCase
 
-abstract class BaseFavViewModel<T: Any>(getData: () -> Flow<List<T>>): ViewModel() {
-    val listFlow: Flow<List<T>> = getData()
+abstract class BaseFavViewModel<T: Any>(
+    private val favoriteUseCase: FavoriteUseCase<T>
+): ViewModel() {
+    val listFlow: Flow<List<T>> = favoriteUseCase.getFavorites()
+
+    fun favorite(isAdd: Boolean, id: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                if (isAdd) {
+                    favoriteUseCase.favorite(id)
+                } else {
+                    favoriteUseCase.unFavorite(id)
+                }
+            }
+        }
+    }
 }

@@ -1,18 +1,19 @@
-package org.hxl.favorite.menu.starship
+package org.hxl.discover.menu.starship.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import org.hxl.common.base.BaseAdapter
+import org.hxl.common.base.BasePagingAdapter
 import org.hxl.common.callback.StarShipItemCallback
 import org.hxl.discover.databinding.StarshipItemBinding
-import org.hxl.discover.menu.starship.adapter.StarShipViewHolder
 import org.hxl.model.StarShip
 
-class StarShipFavAdapter(
+class StarShipListAdapter(
     private val favLogic: (isAdd: Boolean, id: Int) -> Unit
-): BaseAdapter<StarShip, StarShipViewHolder>(StarShipItemCallback) {
+): BasePagingAdapter<StarShip, StarShipViewHolder>(StarShipItemCallback) {
+
     override fun getViewHolder(parent: ViewGroup?, viewType: Int): StarShipViewHolder {
-        val binding = StarshipItemBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
+        val binding: StarshipItemBinding = StarshipItemBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
         return StarShipViewHolder(favLogic, binding)
     }
+
 }
