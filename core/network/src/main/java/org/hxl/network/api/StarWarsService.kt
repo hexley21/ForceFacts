@@ -1,8 +1,5 @@
 package org.hxl.network.api
 
-import org.hxl.model.Character
-import org.hxl.model.Film
-import org.hxl.model.StarShip
 import org.hxl.network.model.CharacterDTO
 import org.hxl.network.model.FilmDTO
 import org.hxl.network.model.ListResponse
@@ -28,6 +25,6 @@ interface StarWarsService {
 
     @GET("films/")
     suspend fun getFilms(@Query("page") page: Int): ListResponse<FilmDTO>
-    @GET("films/")
+    @GET("films/{id}")
     suspend fun getFilmById(@Path("id") id: Int): FilmDTO
 }

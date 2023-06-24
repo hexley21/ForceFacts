@@ -5,8 +5,8 @@ import org.hxl.network.model.FilmDTO
 
 fun FilmDTO.mapToModel(): Film {
     return Film(
+        parseUrl(url),
         title,
-        episodeId,
         director,
         producer,
     )

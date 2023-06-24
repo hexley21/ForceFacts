@@ -1,21 +1,20 @@
-package org.hxl.discover.menu.charcater
+package org.hxl.favorite.menu.character
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import org.hxl.common.base.BasePagingAdapter
 import org.hxl.discover.databinding.StarwarsListBinding
-import org.hxl.discover.menu.BaseListFragment
+import org.hxl.favorite.menu.base.BaseFavFragment
 import org.hxl.model.Character
 
 @AndroidEntryPoint
-class CharacterListFragmentSearch : BaseListFragment<Character, CharacterListViewModel>() {
+class CharacterFavFragment : BaseFavFragment<Character, CharacterFavViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listAdapter = CharacterListAdapter()
+        listAdapter = CharacterFavAdapter(vm::favoriteCharacter)
     }
 
     override fun getViewBinding(
@@ -25,7 +24,5 @@ class CharacterListFragmentSearch : BaseListFragment<Character, CharacterListVie
         return StarwarsListBinding.inflate(inflater, container, false)
     }
 
-    override val vm: CharacterListViewModel  by viewModels(
-        ownerProducer = { requireParentFragment() }
-    )
+    override val vm: CharacterFavViewModel by viewModels()
 }

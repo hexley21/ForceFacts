@@ -20,7 +20,7 @@ class CharacterDTOMapperTest {
         birthYear = "19BBY",
         gender = "Male",
         homeworld = "Tatooine",
-        films = listOf("A New Hope", "The Empire Strikes Back", "Return of the Jedi"),
+        films = listOf("https://swapi.dev/api/films/1/", "https://swapi.dev/api/films/2/", "https://swapi.dev/api/films/3/"),
         species = listOf("Human"),
         vehicles = listOf("Snowspeeder", "Imperial Speeder Bike"),
         starships = listOf("X-wing", "Millennium Falcon"),
@@ -30,9 +30,11 @@ class CharacterDTOMapperTest {
     )
 
     private val fakeModel = Character(
+        id = 1,
         name = "Luke Skywalker",
         gender = "Male",
-        starships = 2
+        starships = 2,
+        films = listOf(1, 2, 3)
     )
 
     @Test
@@ -40,10 +42,11 @@ class CharacterDTOMapperTest {
         // Act
         val converted = fakeDTO.mapToModel()
         // Assert
+        TestCase.assertEquals(fakeModel.id, converted.id)
         TestCase.assertEquals(fakeModel.name, converted.name)
         TestCase.assertEquals(fakeModel.gender, converted.gender)
         TestCase.assertEquals(fakeModel.starships, converted.starships)
-        TestCase.assertEquals(fakeModel.films.size, converted.films.size)
+        TestCase.assertEquals(fakeModel.films, converted.films)
     }
 
 }

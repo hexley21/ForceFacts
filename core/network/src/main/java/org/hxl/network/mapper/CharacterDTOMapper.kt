@@ -5,8 +5,11 @@ import org.hxl.network.model.CharacterDTO
 
 fun CharacterDTO.mapToModel(): Character {
     return Character(
+        parseUrl(url),
         name,
         gender,
         starships?.size ?: 0,
+        false,
+        films.map { parseUrl(it) }
     )
 }

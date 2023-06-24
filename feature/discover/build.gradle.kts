@@ -45,6 +45,8 @@ dependencies {
     implementation(project(":core:model"))
 
     implementation(libs.core.ktx)
+    implementation(libs.kotlinx.coroutines)
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -63,6 +65,6 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.junit.ext)
     androidTestImplementation(libs.espresso.core)
 }

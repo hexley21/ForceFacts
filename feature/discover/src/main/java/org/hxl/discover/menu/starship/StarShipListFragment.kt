@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import org.hxl.common.base.BasePagingAdapter
 import org.hxl.discover.databinding.StarwarsListBinding
-import org.hxl.discover.menu.BaseListFragment
+import org.hxl.discover.menu.base.BaseListFragment
 import org.hxl.model.StarShip
 
 @AndroidEntryPoint
-class StarShipListFragmentSearch : BaseListFragment<StarShip, StarShipListViewModel>() {
+class StarShipListFragment : BaseListFragment<StarShip, StarShipListViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listAdapter = StarShipListAdapter()
+        listAdapter = StarShipListAdapter(vm::favorite)
     }
     override fun getViewBinding(
         inflater: LayoutInflater,

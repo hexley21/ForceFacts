@@ -35,11 +35,11 @@ data class StarShipDTO(
     @Json(name = "pilots")
     val pilots: List<Any>?,
     @Json(name = "films")
-    val films: List<String>?,
+    val films: List<String>,
     @Json(name = "created")
     val created: String?,
     @Json(name = "edited")
     val edited: String?,
     @Json(name = "url")
-    val url: String?
+    val url: String
 )
