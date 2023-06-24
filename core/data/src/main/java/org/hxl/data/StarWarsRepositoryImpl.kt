@@ -1,10 +1,13 @@
 package org.hxl.data
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import org.hxl.data.repository.StarWarsLocal
 import org.hxl.data.repository.StarWarsRemote
 import org.hxl.domain.repository.StarWarsRepository
 import org.hxl.model.Character
+import org.hxl.model.Film
+import org.hxl.model.FilmInfo
 import org.hxl.model.StarShip
 import javax.inject.Inject
 
@@ -21,13 +24,6 @@ class StarWarsRepositoryImpl @Inject constructor(
         response.map {
             it.isFavorite = local.isCharacterFavorite(it.id)
 
-            it.films.forEach { film ->
-                if (!local.isFilmCached(film)) {
-                    local.insertFilm(
-                        remote.getFilmById(film)
-                    )
-                }
-            }
             if (it.id !in cachedCharacters) {
                 local.insertCharacter(it)
                 cachedCharacters.add(it.id)
@@ -46,7 +42,12 @@ class StarWarsRepositoryImpl @Inject constructor(
     }
 
     override fun getFavoriteCharacters(): Flow<List<Character>> {
-        return local.getFavoriteCharacters()
+        return local.getFavoriteCharacters().map { characters ->
+            characters.onEach { character ->
+                val updatedFilmInfo = getFilmInfo(character.filmInfo.ids)
+                character.filmInfo = updatedFilmInfo
+            }
+        }
     }
 
     override suspend fun searchStarShips(query: String, page: Int): List<StarShip> {
@@ -54,13 +55,7 @@ class StarWarsRepositoryImpl @Inject constructor(
         response.map {
             it.isFavorite = local.isStarShipFavorite(it.id)
 
-            it.films.forEach { film ->
-                if (!local.isFilmCached(film)) {
-                    local.insertFilm(
-                        remote.getFilmById(film)
-                    )
-                }
-            }
+            it.films.forEach { film -> getFilm(film) }
             if (it.id !in cachedStarShips) {
                 local.insertStarShip(it)
                 cachedStarShips.add(it.id)
@@ -79,5 +74,23 @@ class StarWarsRepositoryImpl @Inject constructor(
 
     override fun getFavoriteStarShips(): Flow<List<StarShip>> {
         return local.getFavoriteStarShips()
+    }
+
+    override suspend fun getFilmInfo(id: List<Int>): FilmInfo {
+        val films: MutableList<Film> = mutableListOf()
+        for (i in id) {
+            films.add(getFilm(i))
+        }
+        return films.toInfo()
+    }
+
+    private suspend fun getFilm(id: Int): Film {
+        return if (local.isFilmCached(id)) {
+            local.getFilmById(id)
+        } else {
+            val response = remote.getFilmById(id)
+            local.insertFilm(response)
+            response
+        }
     }
 }

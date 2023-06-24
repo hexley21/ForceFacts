@@ -4,14 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.hxl.domain.usecase.FavoriteUseCase
+import org.hxl.domain.usecase.FilmInfoUseCase
+import org.hxl.model.FilmInfo
 
 abstract class BaseFavViewModel<T: Any>(
     private val favoriteUseCase: FavoriteUseCase<T>
 ): ViewModel() {
-    val listFlow: Flow<List<T>> = favoriteUseCase.getFavorites()
+    val listFlow: Flow<List<T>> = favoriteUseCase.getFavorites().flowOn(Dispatchers.IO)
 
     fun favorite(isAdd: Boolean, id: Int) {
         viewModelScope.launch {
@@ -24,4 +27,5 @@ abstract class BaseFavViewModel<T: Any>(
             }
         }
     }
+
 }

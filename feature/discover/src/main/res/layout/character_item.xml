@@ -6,6 +6,8 @@
     <data>
         <import type="android.view.View"/>
         <variable name="character" type="org.hxl.model.Character" />
+
+        <variable name="film_info" type="org.hxl.model.FilmInfo" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -42,29 +44,79 @@
                     tools:text="Star ships: 123"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
-                <TextView
-                    android:visibility="@{character.films.empty ? View.GONE : View.VISIBLE}"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text='@{@string/movies(character.films.size())}'
-                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                    tools:text="Movies: 123, 456, 678" />
+                    android:layout_marginTop="@dimen/distance_small"
+                    android:gravity="top"
+                    android:orientation="horizontal"
+                    android:visibility='@{film_info == null ? View.GONE : View.VISIBLE}'>
 
-                <TextView
-                    android:visibility="@{character.films.empty ? View.GONE : View.VISIBLE}"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text='@{@string/director(character.films.size())}'
-                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                    tools:text="Director: 123, 456" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{@string/movies}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        tools:text="Movies: " />
 
-                <TextView
-                    android:visibility="@{character.films.empty ? View.GONE : View.VISIBLE}"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/distance_small"
+                        android:text='@{film_info.films}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        tools:text="123, 456, 678" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text='@{@string/producer(character.films.size())}'
-                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                    tools:text="Producer: 123, 456" />
+                    android:layout_marginTop="@dimen/distance_small"
+                    android:gravity="top"
+                    android:orientation="horizontal"
+                    android:visibility='@{film_info == null ? View.GONE : View.VISIBLE}'>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{@string/director}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        tools:text="Director:" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/distance_small"
+                        android:text='@{film_info.directors}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        tools:text="123, 456, 789" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_small"
+                    android:gravity="top"
+                    android:orientation="horizontal"
+                    android:visibility='@{film_info == null ? View.GONE : View.VISIBLE}'>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{@string/producer}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        tools:text="Producer:" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/distance_small"
+                        android:text='@{film_info.producers}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        tools:text="123, 456, 789" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <CheckBox

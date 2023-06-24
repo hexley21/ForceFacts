@@ -1,6 +1,7 @@
 package org.hxl.network.mapper
 
 import org.hxl.model.Character
+import org.hxl.model.FilmInfo
 import org.hxl.network.model.CharacterDTO
 
 fun CharacterDTO.mapToModel(): Character {
@@ -10,6 +11,8 @@ fun CharacterDTO.mapToModel(): Character {
         gender,
         starships?.size ?: 0,
         false,
-        films.map { parseUrl(it) }
+        FilmInfo(
+            films.map { parseUrl(it) }
+        )
     )
 }

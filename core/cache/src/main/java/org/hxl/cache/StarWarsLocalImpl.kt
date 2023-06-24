@@ -40,12 +40,12 @@ class StarWarsLocalImpl(
     }
 
     override suspend fun insertCharacter(character: List<Character>) {
-        val characters = character.map { it.mapToEntity(it.films) }
+        val characters = character.map { it.mapToEntity(it.filmInfo.ids) }
         characterDao.insertCharacter(*characters.toTypedArray())
     }
 
     override suspend fun insertCharacter(character: Character) {
-        characterDao.insertCharacter(character.mapToEntity(character.films))
+        characterDao.insertCharacter(character.mapToEntity(character.filmInfo.ids))
     }
 
     override suspend fun isCharacterFavorite(id: Int): Boolean {

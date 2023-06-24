@@ -15,4 +15,9 @@ class CharacterFavAdapter(
         val binding = CharacterItemBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
         return CharacterViewHolder(favLogic, binding)
     }
+
+    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
+        super.onBindViewHolder(holder, position)
+        holder.binding.filmInfo = getItem(position).filmInfo
+    }
 }

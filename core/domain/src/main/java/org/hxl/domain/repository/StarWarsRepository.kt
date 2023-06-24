@@ -2,6 +2,8 @@ package org.hxl.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 import org.hxl.model.Character
+import org.hxl.model.Film
+import org.hxl.model.FilmInfo
 import org.hxl.model.StarShip
 
 interface StarWarsRepository {
@@ -15,4 +17,5 @@ interface StarWarsRepository {
     suspend fun unFavoriteStarShip(id: Int)
     fun getFavoriteStarShips(): Flow<List<StarShip>>
 
+    suspend fun getFilmInfo(id: List<Int>): FilmInfo
 }

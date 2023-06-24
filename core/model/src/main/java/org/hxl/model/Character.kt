@@ -6,5 +6,5 @@ data class Character(
     val gender: String,
     val starships: Int,
     var isFavorite: Boolean = false,
-    val films: List<Int> = mutableListOf()
+    var filmInfo: FilmInfo = FilmInfo()
 )
