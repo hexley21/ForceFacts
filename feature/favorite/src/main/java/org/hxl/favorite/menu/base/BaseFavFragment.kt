@@ -3,41 +3,40 @@ package org.hxl.favorite.menu.base
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.LoadState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.hxl.common.base.BaseAdapter
 import org.hxl.common.base.BaseFragmentVM
-import org.hxl.common.base.BasePagingAdapter
 import org.hxl.discover.databinding.StarwarsListBinding
 import java.net.UnknownHostException
 
 abstract class BaseFavFragment<T: Any, VM: BaseFavViewModel<T>>: BaseFragmentVM<StarwarsListBinding, VM>() {
-    protected lateinit var listAdapter: BasePagingAdapter<T, *>
+    protected lateinit var listAdapter: BaseAdapter<T, *>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvStarwarsList.adapter = listAdapter
 
         lifecycleScope.launch {
-            listAdapter.addLoadStateListener{
-                if (it.refresh is LoadState.Loading) {
-                    if (binding.pbMiddle.visibility == View.GONE) {
-                        binding.pbTop.visibility = View.VISIBLE
-                    }
-//                    EspressoIdlingResource.increment();
-                }
-                else if (it.refresh is LoadState.NotLoading) {
-
-                    hideError()
-                    hideLoading()
-//                    EspressoIdlingResource.decrement();
-                } else if (it.refresh is LoadState.Error) {
-                    showError((it.refresh as LoadState.Error).error)
-                    hideLoading()
-                }
-            }
+//            listAdapter.addLoadStateListener{
+//                if (it.refresh is LoadState.Loading) {
+//                    if (binding.pbMiddle.visibility == View.GONE) {
+//                        binding.pbTop.visibility = View.VISIBLE
+//                    }
+////                    EspressoIdlingResource.increment();
+//                }
+//                else if (it.refresh is LoadState.NotLoading) {
+//
+//                    hideError()
+//                    hideLoading()
+////                    EspressoIdlingResource.decrement();
+//                } else if (it.refresh is LoadState.Error) {
+//                    showError((it.refresh as LoadState.Error).error)
+//                    hideLoading()
+//                }
+//            }
             vm.listFlow.collectLatest {
-                listAdapter.submitData(it)
+                listAdapter.submitList(it)
             }
         }
 
@@ -48,7 +47,6 @@ abstract class BaseFavFragment<T: Any, VM: BaseFavViewModel<T>>: BaseFragmentVM<
 
     }
     private fun refresh() {
-        listAdapter.refresh()
     }
 
     private fun hideError() {

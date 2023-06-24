@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinKapt)
 }
 
 android {
@@ -38,11 +39,11 @@ dependencies {
     implementation(project(":core:model"))
 
     implementation(libs.javax.inject)
-    implementation(libs.core.ktx)
     implementation(libs.kotlinx.coroutines)
 
     implementation(libs.room.runtime)
-    implementation(libs.room.compiler)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
 
     testImplementation(libs.room.testing)
 

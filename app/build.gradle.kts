@@ -45,6 +45,7 @@ android {
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:network"))
+    implementation(project(":core:cache"))
     implementation(project(":core:data"))
     implementation(project(":core:domain"))
     implementation(project(":core:model"))
@@ -53,7 +54,6 @@ dependencies {
     implementation(project(":feature:discover"))
 
     implementation(libs.core.ktx)
-    implementation(libs.kotlinx.coroutines)
 
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -63,6 +63,10 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.lifecycle.common)
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
 
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)

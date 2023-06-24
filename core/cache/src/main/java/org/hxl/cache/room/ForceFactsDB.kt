@@ -14,7 +14,7 @@ import org.hxl.cache.starwars.starship.StarShipEntity
     version = 1,
     exportSchema = false
 )
-abstract class ForceFactsDB: RoomDatabase() {
+abstract class  ForceFactsDB: RoomDatabase() {
     companion object {
         const val DB_NAME = "force_facts.db"
         const val CHARACTER_TABLE = "character"

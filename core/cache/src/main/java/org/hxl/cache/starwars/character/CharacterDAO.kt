@@ -4,19 +4,20 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
+import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CharacterDAO {
     @Query("SELECT * FROM character ORDER BY id ASC LIMIT 10 OFFSET :offset")
-    fun getCharacters(offset: Int) : Flow<List<CharacterEntity>>
+    suspend fun getCharacters(offset: Int) : List<CharacterEntity>
 
     @Query("SELECT * FROM character WHERE id = :id")
-    fun getCharacterById(id: Int) : Flow<CharacterEntity>
+    suspend fun getCharacterById(id: Int) : CharacterEntity
 
-    @Query("SELECT * FROM character WHERE is_favorite = 1 ORDER BY id ASC LIMIT 10 OFFSET :offset")
-    fun getFavoriteCharacters(offset: Int) : Flow<List<CharacterEntity>>
+    @Transaction
+    @Query("SELECT * FROM character WHERE is_favorite = 1 ORDER BY id")
+    fun getFavoriteCharacters() : Flow<List<CharacterEntity>>
 
     @Query("UPDATE character SET is_favorite = 1 WHERE id = :id")
     fun favoriteCharacter(id: Int): Int

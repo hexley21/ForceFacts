@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.hxl.discover.databinding.StarwarsListBinding
-import org.hxl.discover.menu.starship.StarShipListAdapter
 import org.hxl.favorite.menu.base.BaseFavFragment
 import org.hxl.model.StarShip
 
@@ -15,7 +14,7 @@ class StarShipFavFragment : BaseFavFragment<StarShip, StarShipFavViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listAdapter = StarShipListAdapter()
+//        listAdapter = StarShipListAdapter()
     }
     override fun getViewBinding(
         inflater: LayoutInflater,

@@ -11,7 +11,7 @@ import org.hxl.model.Character
 class CharacterListAdapter: BasePagingAdapter<Character, CharacterListAdapter.CharacterViewHolder>(
     CharacterItemCallBack
 ) {
-    inner class CharacterViewHolder(binding: CharacterItemBinding): BaseViewHolder<CharacterItemBinding, Character>(binding) {
+    class CharacterViewHolder(binding: CharacterItemBinding): BaseViewHolder<CharacterItemBinding, Character>(binding) {
         override fun accept(t: Character) {
             binding.character = t
         }

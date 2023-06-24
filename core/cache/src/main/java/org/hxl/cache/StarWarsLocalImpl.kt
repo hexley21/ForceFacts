@@ -15,19 +15,17 @@ import org.hxl.data.repository.StarWarsLocal
 import org.hxl.model.Character
 import org.hxl.model.Film
 import org.hxl.model.StarShip
-import javax.inject.Inject
 
-class StarWarsLocalImpl @Inject constructor(
+class StarWarsLocalImpl(
     private val characterDao: CharacterDAO,
     private val starShipDao: StarShipDAO,
     private val filmDao: FilmDAO
 ): StarWarsLocal {
-    override fun getCharacters(offset: Int): Flow<List<Character>> {
-        return characterDao.getCharacters(offset).map { it.map { entity -> entity.mapToModel() } }
-    }
+    override suspend fun getCharacters(offset: Int): List<Character> {
+        return characterDao.getCharacters(offset).map { it.mapToModel() } }
 
-    override fun getCharacterById(id: Int): Flow<Character> {
-        return characterDao.getCharacterById(id).map { it.mapToModel() }
+    override suspend fun getCharacterById(id: Int): Character {
+        return characterDao.getCharacterById(id).mapToModel()
     }
 
     override suspend fun favoriteCharacter(id: Int) {
@@ -35,23 +33,25 @@ class StarWarsLocalImpl @Inject constructor(
     }
 
     override suspend fun unFavoriteCharacter(id: Int) {
-        characterDao.unFavoriteCharacter(id)
+        characterDao.favoriteCharacter(id)
     }
 
-    override fun getFavoriteCharacters(offset: Int): Flow<List<Character>> {
-        return characterDao.getFavoriteCharacters(offset).map { it.map { entity -> entity.mapToModel() } }
+    override fun getFavoriteCharacters(): Flow<List<Character>> {
+        return characterDao.getFavoriteCharacters().map { it.map {
+            entity -> entity.mapToModel(entity.films.split(",").map { id -> getFilmById(id.toInt()).mapToEntity() })
+        }}
     }
 
     override suspend fun insertCharacter(vararg character: Character) {
-        characterDao.insertCharacter(*character.map { it.mapToEntity(it.films.map { film -> film.id })}.toTypedArray())
+        characterDao.insertCharacter(*character.map { it.mapToEntity(it.films) }.toTypedArray())
     }
 
-    override fun getStarShips(offset: Int): Flow<List<StarShip>> {
-        return starShipDao.getStarShips(offset).map { it.map { entity -> entity.mapToModel() } }
+    override suspend fun getStarShips(offset: Int): List<StarShip> {
+        return starShipDao.getStarShips(offset).map { it.mapToModel() }
     }
 
-    override fun getStarShipById(id: Int): Flow<StarShip> {
-        return starShipDao.getStarShipById(id).map { it.mapToModel() }
+    override suspend fun getStarShipById(id: Int): StarShip {
+        return starShipDao.getStarShipById(id).mapToModel()
     }
 
     override suspend fun favoriteStarShip(id: Int) {
@@ -62,20 +62,21 @@ class StarWarsLocalImpl @Inject constructor(
         starShipDao.unFavoriteStarShip(id)
     }
 
-    override fun getFavoriteStarShips(offset: Int): Flow<List<StarShip>> {
-        return starShipDao.getFavoriteStarShips(offset).map { it.map { entity -> entity.mapToModel() } }
+    override fun getFavoriteStarShips(): Flow<List<StarShip>> {
+        return starShipDao.getFavoriteStarShips().map { it.map { entity -> entity.mapToModel() } }
     }
 
     override suspend fun insertStarShip(vararg starShip: StarShip) {
-        starShipDao.insertStarShip(*starShip.map { it.mapToEntity(it.films.map { film -> film.id })}.toTypedArray())
+        starShipDao.insertStarShip(*starShip.map { it.mapToEntity() }.toTypedArray())
     }
 
-    override fun getFilms(offset: Int): Flow<List<Film>> {
-        return filmDao.getFilms(offset).map { it.map { entity -> entity.mapToModel() } }
+    override suspend fun getFilms(): List<Film> {
+        return filmDao.getFilms().map { it.mapToModel() }
     }
 
-    override fun getFilmById(id: Int): Flow<Film> {
-        return filmDao.getFilmById(id).map { entity -> entity.mapToModel() } }
+    override suspend fun getFilmById(id: Int): Film {
+        return filmDao.getFilmById(id).mapToModel()
+    }
 
     override suspend fun insertFilm(vararg film: Film) {
         filmDao.insertFilm(*film.map { it.mapToEntity() }.toTypedArray())

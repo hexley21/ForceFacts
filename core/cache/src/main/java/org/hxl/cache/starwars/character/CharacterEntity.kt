@@ -19,5 +19,5 @@ data class CharacterEntity(
     @ColumnInfo(name = "is_favorite")
     val isFavorite: Boolean,
     @ColumnInfo(name = "films")
-    val films: List<Int>
+    val films: String
 )

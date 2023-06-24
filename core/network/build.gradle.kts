@@ -13,7 +13,6 @@ dependencies {
     implementation(project(":core:model"))
 
     implementation(libs.javax.inject)
-    implementation(libs.core.ktx)
     implementation(libs.kotlinx.coroutines)
 
     implementation(libs.retrofit)
