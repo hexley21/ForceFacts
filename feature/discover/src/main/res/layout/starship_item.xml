@@ -74,8 +74,9 @@
             </LinearLayout>
 
             <CheckBox
+                android:checked="@{starship.isFavorite}"
                 android:id="@+id/cb_favorite"
-                style="@style/ForceFacts.Bookmark"
+                style="@style/ForceFacts.Favorite"
                 android:layout_width="@dimen/icon_default"
                 android:layout_height="match_parent"
                 android:button="@drawable/sl_favorite" />

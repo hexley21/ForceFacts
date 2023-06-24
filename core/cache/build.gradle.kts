@@ -2,12 +2,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.kotlinKapt)
-    alias(libs.plugins.hilt)
 }
 
 android {
-    namespace = "org.hxl.navigator"
+    namespace = "org.hxl.cache"
     compileSdk = 33
 
     defaultConfig {
@@ -15,10 +13,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildFeatures {
-        dataBinding = true
     }
 
     buildTypes {
@@ -40,25 +34,22 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
 
-    implementation(project(":feature:discover"))
-    implementation(project(":feature:favorite"))
-
+    implementation(libs.javax.inject)
     implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.constraintlayout)
 
-    implementation(libs.androidx.fragment.ktx)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.androidx.lifecycle.common)
+    implementation(libs.room.runtime)
+    implementation(libs.room.compiler)
 
-    implementation(libs.dagger.hilt)
-    kapt(libs.dagger.hilt.compiler)
+    testImplementation(libs.room.testing)
 
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.roboelectric)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.junit.ext)
-    androidTestImplementation(libs.espresso.core)
+    testImplementation(libs.junit.ext)
+    testImplementation(libs.test.runner)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(project(":core:common-test"))
 }

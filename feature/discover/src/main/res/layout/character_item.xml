@@ -69,8 +69,8 @@
 
             <CheckBox
                 android:id="@+id/cb_favorite"
-                style="@style/ForceFacts.Bookmark"
-                android:checked="@{character.isBookmarked}"
+                style="@style/ForceFacts.Favorite"
+                android:checked="@{character.isFavorite}"
                 android:layout_width="@dimen/icon_default"
                 android:layout_height="match_parent"
                 android:button="@drawable/sl_favorite" />

@@ -5,6 +5,7 @@ import org.hxl.network.model.StarShipDTO
 
 fun StarShipDTO.mapToModel(): StarShip {
     return StarShip(
+        parseUrl(url),
         name,
         model,
         manufacturer,

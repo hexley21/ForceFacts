@@ -30,6 +30,7 @@ class CharacterDTOMapperTest {
     )
 
     private val fakeModel = Character(
+        id = 1,
         name = "Luke Skywalker",
         gender = "Male",
         starships = 2
@@ -40,6 +41,7 @@ class CharacterDTOMapperTest {
         // Act
         val converted = fakeDTO.mapToModel()
         // Assert
+        TestCase.assertEquals(fakeModel.id, converted.id)
         TestCase.assertEquals(fakeModel.name, converted.name)
         TestCase.assertEquals(fakeModel.gender, converted.gender)
         TestCase.assertEquals(fakeModel.starships, converted.starships)

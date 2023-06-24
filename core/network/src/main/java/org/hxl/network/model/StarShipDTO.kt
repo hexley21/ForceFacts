@@ -41,5 +41,5 @@ data class StarShipDTO(
     @Json(name = "edited")
     val edited: String?,
     @Json(name = "url")
-    val url: String?
+    val url: String
 )

@@ -32,6 +32,7 @@ class StarShipDTOMapperTest {
     )
 
     private val fakeModel = StarShip(
+        id = 10,
         name = "Millennium Falcon",
         model = "YT-1300 light freighter",
         manufacturer = "Corellian Engineering Corporation",
@@ -43,6 +44,7 @@ class StarShipDTOMapperTest {
         // Act
         val converted = fakeDTO.mapToModel()
         // Assert
+        assertEquals(fakeModel.id, converted.id)
         assertEquals(fakeModel.name, converted.name)
         assertEquals(fakeModel.model, converted.model)
         assertEquals(fakeModel.manufacturer, converted.manufacturer)
