@@ -47,6 +47,8 @@ dependencies {
     implementation(project(":feature:discover"))
 
     implementation(libs.core.ktx)
+    implementation(libs.kotlinx.coroutines)
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

@@ -45,6 +45,8 @@ dependencies {
     implementation(project(":core:model"))
 
     implementation(libs.core.ktx)
+    implementation(libs.kotlinx.coroutines)
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

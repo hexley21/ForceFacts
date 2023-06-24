@@ -13,7 +13,10 @@ interface CharacterDAO {
     fun getCharacters(offset: Int) : Flow<List<CharacterEntity>>
 
     @Query("SELECT * FROM character WHERE id = :id")
-    fun getCharacterById(id: Int) : Flow<List<CharacterEntity>>
+    fun getCharacterById(id: Int) : Flow<CharacterEntity>
+
+    @Query("SELECT * FROM character WHERE is_favorite = 1 ORDER BY id ASC LIMIT 10 OFFSET :offset")
+    fun getFavoriteCharacters(offset: Int) : Flow<List<CharacterEntity>>
 
     @Query("UPDATE character SET is_favorite = 1 WHERE id = :id")
     fun favoriteCharacter(id: Int): Int

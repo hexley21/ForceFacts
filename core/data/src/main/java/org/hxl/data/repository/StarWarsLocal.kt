@@ -1,22 +1,26 @@
 package org.hxl.data.repository
 
+import kotlinx.coroutines.flow.Flow
 import org.hxl.model.Character
 import org.hxl.model.Film
 import org.hxl.model.StarShip
 
 interface StarWarsLocal {
-    suspend fun getCharacters(offset: Int): List<Character>
-    suspend fun getCharacterById(id: Int): Character
-    suspend fun favoriteCharacter(id: String)
-    suspend fun unFavoriteCharacter(id: String)
-    suspend fun getFavoriteCharacters(offset: Int): List<Character>
+    fun getCharacters(offset: Int): Flow<List<Character>>
+    fun getCharacterById(id: Int): Flow<Character>
+    suspend fun favoriteCharacter(id: Int)
+    suspend fun unFavoriteCharacter(id: Int)
+    fun getFavoriteCharacters(offset: Int): Flow<List<Character>>
+    suspend fun insertCharacter(vararg character: Character)
 
-    suspend fun getStarShips(offset: Int): List<StarShip>
-    suspend fun getStarShipById(id: Int): StarShip
-    suspend fun favoriteStarShip(id: String)
-    suspend fun unFavoriteStarShip(id: String)
-    suspend fun getFavoriteStarShips(offset: Int): List<StarShip>
+    fun getStarShips(offset: Int): Flow<List<StarShip>>
+    fun getStarShipById(id: Int): Flow<StarShip>
+    suspend fun favoriteStarShip(id: Int)
+    suspend fun unFavoriteStarShip(id: Int)
+    fun getFavoriteStarShips(offset: Int): Flow<List<StarShip>>
+    suspend fun insertStarShip(vararg starShip: StarShip)
 
-    suspend fun getFilms(offset: Int): List<Film>
-    suspend fun getFilmById(id: Int): Film
+    fun getFilms(offset: Int): Flow<List<Film>>
+    fun getFilmById(id: Int): Flow<Film>
+    suspend fun insertFilm(vararg film: Film)
 }
