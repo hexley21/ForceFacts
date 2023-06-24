@@ -30,7 +30,7 @@ class NavigatorFragment: BaseFragment<FragmentNavigatorBinding>() {
     private fun onMenuItemSelect(id: Int): Boolean {
         when (id) {
             R.id.menu_favorites -> {
-                // TODO: Implement menu_favorites navigation
+                findNavController().navigate(org.hxl.favorite.R.id.nav_favorite)
             }
             else -> {
                 findNavController().navigate(org.hxl.discover.R.id.nav_discover)

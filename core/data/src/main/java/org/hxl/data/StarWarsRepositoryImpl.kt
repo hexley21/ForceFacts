@@ -31,7 +31,7 @@ class StarWarsRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getFavoriteCharacters(): List<Character> {
+    override suspend fun getFavoriteCharacters(offset: Int): List<Character> {
         TODO("Not yet implemented")
     }
 
@@ -55,7 +55,7 @@ class StarWarsRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getFavoriteStarShips(): List<StarShip> {
+    override suspend fun getFavoriteStarShips(offset: Int): List<StarShip> {
         TODO("Not yet implemented")
     }
 }

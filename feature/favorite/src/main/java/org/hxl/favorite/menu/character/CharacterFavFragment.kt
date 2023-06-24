@@ -1,22 +1,23 @@
-package org.hxl.discover.menu.starship
+package org.hxl.favorite.menu.character
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import org.hxl.common.base.BasePagingAdapter
 import org.hxl.discover.databinding.StarwarsListBinding
-import org.hxl.discover.menu.BaseListFragment
-import org.hxl.model.StarShip
+import org.hxl.discover.menu.charcater.CharacterListAdapter
+import org.hxl.favorite.menu.base.BaseFavFragment
+import org.hxl.model.Character
 
 @AndroidEntryPoint
-class StarShipListFragmentSearch : BaseListFragment<StarShip, StarShipListViewModel>() {
+class CharacterFavFragment : BaseFavFragment<Character, CharacterFavViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listAdapter = StarShipListAdapter()
+        listAdapter = CharacterListAdapter()
     }
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -24,7 +25,5 @@ class StarShipListFragmentSearch : BaseListFragment<StarShip, StarShipListViewMo
         return StarwarsListBinding.inflate(inflater, container, false)
     }
 
-    override val vm: StarShipListViewModel  by viewModels(
-        ownerProducer = { requireParentFragment() }
-    )
+    override val vm: CharacterFavViewModel by viewModels()
 }

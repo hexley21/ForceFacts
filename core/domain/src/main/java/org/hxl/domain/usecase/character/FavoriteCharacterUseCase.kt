@@ -11,7 +11,7 @@ class FavoriteCharacterUseCase @Inject constructor(private val repository: StarW
     suspend fun unFavoriteCharacter(id: String) {
         return repository.unFavoriteCharacter(id)
     }
-    suspend fun getFavoriteCharacters(): List<Character> {
-        return repository.getFavoriteCharacters()
+    suspend fun getFavoriteCharacters(page: Int): List<Character> {
+        return repository.getFavoriteCharacters(page * 10)
     }
 }

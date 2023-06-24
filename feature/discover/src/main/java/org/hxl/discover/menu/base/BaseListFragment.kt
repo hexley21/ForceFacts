@@ -1,4 +1,4 @@
-package org.hxl.discover.menu
+package org.hxl.discover.menu.base
 
 import android.os.Bundle
 import android.view.View
@@ -48,9 +48,6 @@ abstract class BaseListFragment<T: Any, VM: BaseListViewModel<T>>: BaseFragmentV
 
     }
 
-    fun submitSearch(query: String) {
-        vm.submitSearch(query)
-    }
     private fun refresh() {
         listAdapter.refresh()
     }

@@ -11,7 +11,7 @@ class FavoriteStarShipUseCase @Inject constructor(private val repository: StarWa
     suspend fun unFavoriteStarShip(id: String) {
         return repository.unFavoriteStarShip(id)
     }
-    suspend fun getFavoriteStarShips(): List<StarShip> {
-        return repository.getFavoriteStarShips()
+    suspend fun getFavoriteStarShips(offset: Int): List<StarShip> {
+        return repository.getFavoriteStarShips(offset * 10)
     }
 }

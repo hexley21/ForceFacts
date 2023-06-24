@@ -1,4 +1,4 @@
-package org.hxl.discover.menu
+package org.hxl.discover.menu.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,6 +10,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import org.hxl.discover.menu.ListDataPaging
 
 abstract class BaseListViewModel<T: Any>(private val getData: suspend (query: String, page: Int) -> List<T>): ViewModel() {
     private var searchQuery: String = ""

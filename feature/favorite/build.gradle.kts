@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "org.hxl.navigator"
+    namespace = "org.hxl.favorite"
     compileSdk = 33
 
     defaultConfig {
@@ -41,23 +41,32 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:model"))
 
     implementation(project(":feature:discover"))
-    implementation(project(":feature:favorite"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+    implementation(libs.androidx.swiperefreshlayout)
 
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.lifecycle.common)
 
+    implementation(libs.retrofit)
+
+    implementation(libs.androidx.paging.runtime)
+
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
 
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

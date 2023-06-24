@@ -1,4 +1,4 @@
-package org.hxl.discover.menu
+package org.hxl.favorite.menu
 
 import android.content.Context
 import androidx.fragment.app.Fragment
@@ -7,18 +7,18 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import org.hxl.common.R
-import org.hxl.discover.menu.charcater.CharacterListFragment
-import org.hxl.discover.menu.starship.StarShipListFragment
+import org.hxl.favorite.menu.character.CharacterFavFragment
+import org.hxl.favorite.menu.starship.StarShipFavFragment
 
-class DiscoverStateAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
+class FavoriteStateAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
         return 2
     }
 
     override fun createFragment(position: Int): Fragment {
         return when(position % 2) {
-            1 -> StarShipListFragment()
-            else -> CharacterListFragment()
+            1 -> StarShipFavFragment()
+            else -> CharacterFavFragment()
         }
     }
 
