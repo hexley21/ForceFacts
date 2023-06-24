@@ -12,28 +12,29 @@ class StarWarsRepositoryImpl @Inject constructor(
     private val remote: StarWarsRemote,
     private val local: StarWarsLocal
 ): StarWarsRepository {
-    override suspend fun getCharacters(page: Int): List<Character> {
-        return try {
-            val response: List<Character> = remote.getCharacters(page)
-            local.insertCharacter(*response.toTypedArray())
-            response
-        } catch (e: Exception) {
-            local.getCharacters(page)
-        }
-    }
 
-    override suspend fun getCharacterById(id: Int): Character {
-        return try {
-            val response: Character = remote.getCharacterById(id)
-            local.insertCharacter(response)
-            response
-        } catch (e: Exception) {
-            local.getCharacterById(id)
-        }
-    }
+    private val cachedCharacters: MutableList<Int> = mutableListOf()
+    private val cachedStarShips: MutableList<Int> = mutableListOf()
 
     override suspend fun searchCharacters(query: String, page: Int): List<Character> {
-        return remote.searchCharacters(query, page)
+        val response: List<Character> = remote.searchCharacters(query, page)
+        response.map {
+            it.isFavorite = local.isCharacterFavorite(it.id)
+
+            it.films.forEach { film ->
+                if (!local.isFilmCached(film)) {
+                    local.insertFilm(
+                        remote.getFilmById(film)
+                    )
+                }
+            }
+            if (it.id !in cachedCharacters) {
+                local.insertCharacter(it)
+                cachedCharacters.add(it.id)
+            }
+        }
+
+        return response
     }
 
     override suspend fun favoriteCharacter(id: Int) {
@@ -48,16 +49,24 @@ class StarWarsRepositoryImpl @Inject constructor(
         return local.getFavoriteCharacters()
     }
 
-    override suspend fun getStarShips(page: Int): List<StarShip> {
-        return remote.getStarShips(page)
-    }
-
-    override suspend fun getStarShipById(id: Int): StarShip {
-        return remote.getStarShipById(id)
-    }
-
     override suspend fun searchStarShips(query: String, page: Int): List<StarShip> {
-        return remote.searchStarShips(query, page)
+        val response: List<StarShip> = remote.searchStarShips(query, page)
+        response.map {
+            it.isFavorite = local.isStarShipFavorite(it.id)
+
+            it.films.forEach { film ->
+                if (!local.isFilmCached(film)) {
+                    local.insertFilm(
+                        remote.getFilmById(film)
+                    )
+                }
+            }
+            if (it.id !in cachedStarShips) {
+                local.insertStarShip(it)
+                cachedStarShips.add(it.id)
+            }
+        }
+        return response
     }
 
     override suspend fun favoriteStarShip(id: Int) {

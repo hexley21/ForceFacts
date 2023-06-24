@@ -18,8 +18,8 @@ class StarShipEntity(
     val manufacturer: String,
     @ColumnInfo(name = "passengers")
     val passengers: String,
-    @ColumnInfo(name = "isFavorite")
-    var isFavorite: Boolean
-//    @ColumnInfo(name = "films")
-//    val films: List<Int>
+    @ColumnInfo(name = "is_favorite")
+    var isFavorite: Boolean,
+    @ColumnInfo(name = "films")
+    val films: String
 )

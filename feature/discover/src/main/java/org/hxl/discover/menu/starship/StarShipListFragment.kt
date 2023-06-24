@@ -14,7 +14,7 @@ class StarShipListFragment : BaseListFragment<StarShip, StarShipListViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listAdapter = StarShipListAdapter()
+        listAdapter = StarShipListAdapter(vm::favorite)
     }
     override fun getViewBinding(
         inflater: LayoutInflater,

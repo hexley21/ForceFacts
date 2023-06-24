@@ -25,7 +25,7 @@ data class CharacterDTO(
     @Json(name = "homeworld")
     val homeworld: String?,
     @Json(name = "films")
-    val films: List<String>?,
+    val films: List<String>,
     @Json(name = "species")
     val species: List<Any>?,
     @Json(name = "vehicles")

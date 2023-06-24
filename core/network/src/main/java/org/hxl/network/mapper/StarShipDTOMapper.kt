@@ -9,6 +9,8 @@ fun StarShipDTO.mapToModel(): StarShip {
         name,
         model,
         manufacturer,
-        passengers
+        passengers,
+        false,
+        films.map { parseUrl(it) }
     )
 }

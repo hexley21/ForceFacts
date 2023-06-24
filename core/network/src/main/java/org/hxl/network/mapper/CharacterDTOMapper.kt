@@ -9,5 +9,7 @@ fun CharacterDTO.mapToModel(): Character {
         name,
         gender,
         starships?.size ?: 0,
+        false,
+        films.map { parseUrl(it) }
     )
 }

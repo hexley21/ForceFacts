@@ -8,20 +8,21 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StarShipDAO {
-    @Query("SELECT * FROM star_ship ORDER BY id ASC LIMIT 10 OFFSET :offset")
-    suspend fun getStarShips(offset: Int): List<StarShipEntity>
 
-    @Query("SELECT * FROM star_ship WHERE id = :id")
-    suspend fun getStarShipById(id: Int): StarShipEntity
-
-    @Query("SELECT * FROM star_ship where isFavorite = 1 ORDER BY id ASC")
+    @Query("SELECT * FROM star_ship where is_favorite = 1 ORDER BY id ASC")
     fun getFavoriteStarShips(): Flow<List<StarShipEntity>>
 
-    @Query("UPDATE star_ship SET isFavorite = 1 WHERE id = :id")
+    @Query("UPDATE star_ship SET is_favorite = 1 WHERE id = :id")
     suspend fun favoriteStarShip(id: Int): Int
 
-    @Query("UPDATE star_ship SET isFavorite = 0 WHERE id = :id")
+    @Query("UPDATE star_ship SET is_favorite = 0 WHERE id = :id")
     suspend fun unFavoriteStarShip(id: Int): Int
+
+    @Query("SELECT EXISTS(SELECT 1 FROM star_ship where id == :id AND is_favorite == 1)")
+    fun isFavorite(id: Int): Boolean
+
+    @Query("SELECT EXISTS(SELECT 1 FROM star_ship where id == :id)")
+    fun isCached(id: Int): Boolean
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertStarShip(vararg starShipEntity: StarShipEntity)

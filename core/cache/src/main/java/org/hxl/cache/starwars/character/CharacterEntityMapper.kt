@@ -1,14 +1,14 @@
 package org.hxl.cache.starwars.character
 
-import org.hxl.cache.starwars.film.FilmEntity
-import org.hxl.cache.starwars.film.mapToModel
 import org.hxl.model.Character
-import org.hxl.model.Film
 
-fun CharacterEntity.mapToModel(films: List<FilmEntity> = emptyList()): Character {
-    return Character(id, name, gender, starships, isFavorite, films.map { it.mapToModel() })
+fun CharacterEntity.mapToModel(): Character {
+    if (films == "") {
+        return Character(id, name, gender, starships, isFavorite)
+    }
+    return Character(id, name, gender, starships, isFavorite, films.split(",").map { it.toInt() } )
 }
 
-fun Character.mapToEntity(films: List<Film>): CharacterEntity {
-    return CharacterEntity(id, name, gender, starships, isFavorite, films.map { it.id }.joinToString(","))
+fun Character.mapToEntity(films: List<Int>): CharacterEntity {
+    return CharacterEntity(id, name, gender, starships, isFavorite, films.joinToString(","))
 }

@@ -25,7 +25,7 @@ class StarShipDTOMapperTest {
         mGLT = "75",
         starshipClass = "Light freighter",
         pilots = listOf(),
-        films = listOf("A New Hope", "The Empire Strikes Back", "Return of the Jedi"),
+        films = listOf("https://swapi.dev/api/films/1/", "https://swapi.dev/api/films/2/", "https://swapi.dev/api/films/3/"),
         created = "2014-12-10T16:59:45.094000Z",
         edited = "2014-12-22T17:35:44.464156Z",
         url = "https://swapi.dev/api/starships/10/"
@@ -37,6 +37,8 @@ class StarShipDTOMapperTest {
         model = "YT-1300 light freighter",
         manufacturer = "Corellian Engineering Corporation",
         passengers = "6.0",
+        false,
+        listOf(1, 2, 3)
     )
 
     @Test
@@ -49,8 +51,8 @@ class StarShipDTOMapperTest {
         assertEquals(fakeModel.model, converted.model)
         assertEquals(fakeModel.manufacturer, converted.manufacturer)
         assertEquals(fakeModel.passengers, converted.passengers)
-        assertEquals(fakeModel.films.size, converted.films.size)
+        assertEquals(false, converted.isFavorite)
+        assertEquals(fakeModel.films, converted.films)
     }
 
-    // Additional tests can be added here
 }

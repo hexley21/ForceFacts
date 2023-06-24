@@ -14,7 +14,7 @@ class CharacterListFragment : BaseListFragment<Character, CharacterListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listAdapter = CharacterListAdapter()
+        listAdapter = CharacterListAdapter(vm::favoriteCharacter)
     }
 
     override fun getViewBinding(

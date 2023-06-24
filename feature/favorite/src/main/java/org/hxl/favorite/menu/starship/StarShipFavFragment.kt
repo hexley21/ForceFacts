@@ -14,7 +14,7 @@ class StarShipFavFragment : BaseFavFragment<StarShip, StarShipFavViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        listAdapter = StarShipListAdapter()
+        listAdapter = StarShipFavAdapter(vm::favoriteCharacter)
     }
     override fun getViewBinding(
         inflater: LayoutInflater,
