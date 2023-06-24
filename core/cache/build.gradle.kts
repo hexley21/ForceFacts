@@ -39,6 +39,7 @@ dependencies {
 
     implementation(libs.javax.inject)
     implementation(libs.core.ktx)
+    implementation(libs.kotlinx.coroutines)
 
     implementation(libs.room.runtime)
     implementation(libs.room.compiler)
