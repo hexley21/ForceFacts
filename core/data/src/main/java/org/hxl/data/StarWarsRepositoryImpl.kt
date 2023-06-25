@@ -20,18 +20,26 @@ class StarWarsRepositoryImpl @Inject constructor(
     private val cachedStarShips: MutableList<Int> = mutableListOf()
 
     override suspend fun searchCharacters(query: String, page: Int): List<Character> {
-        val response: List<Character>
-        if (cachedCharacters.isNotEmpty() && query.isEmpty()) {
+        var response: List<Character>
+        if ((cachedCharacters.size / (10 * page)) >= 1 && query.isEmpty()) {
             response = local.getCharacters((page - 1) * 10)
+            if (response.isEmpty()) {
+                response = getCharactersRemote(query, page)
+            }
         } else {
-            response = remote.searchCharacters(query, page)
-            response.map {
-                it.isFavorite = local.isCharacterFavorite(it.id)
+            response = getCharactersRemote(query, page)
+        }
+        return response
+    }
 
-                if (it.id !in cachedCharacters) {
-                    local.insertCharacter(it)
-                    cachedCharacters.add(it.id)
-                }
+    private suspend fun getCharactersRemote(query: String, page: Int): List<Character> {
+        val response: List<Character> = remote.searchCharacters(query, page)
+        response.map {
+            it.isFavorite = local.isCharacterFavorite(it.id)
+
+            if (it.id !in cachedCharacters) {
+                local.insertCharacter(it)
+                cachedCharacters.add(it.id)
             }
         }
         return response
@@ -55,19 +63,26 @@ class StarWarsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun searchStarShips(query: String, page: Int): List<StarShip> {
-        val response: List<StarShip>
-        if (cachedStarShips.isNotEmpty() && query.isEmpty()) {
+        var response: List<StarShip>
+        if ((cachedStarShips.size / (10 * page)) >= 1 && query.isEmpty()) {
             response = local.getStarShips((page - 1) * 10)
+            if (response.isEmpty()) {
+                response = getStarShipsRemote(query, page)
+            }
         } else {
-            response = remote.searchStarShips(query, page)
+            response = getStarShipsRemote(query, page)
+        }
+        return response
+    }
 
-            response.map {
-                it.isFavorite = local.isStarShipFavorite(it.id)
+    private suspend fun getStarShipsRemote(query: String, page: Int): List<StarShip> {
+        val response: List<StarShip> = remote.searchStarShips(query, page)
+        response.map {
+            it.isFavorite = local.isCharacterFavorite(it.id)
 
-                if (it.id !in cachedStarShips) {
-                    local.insertStarShip(it)
-                    cachedStarShips.add(it.id)
-                }
+            if (it.id !in cachedStarShips) {
+                local.insertStarShip(it)
+                cachedStarShips.add(it.id)
             }
         }
         return response

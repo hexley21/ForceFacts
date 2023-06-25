@@ -27,6 +27,7 @@ class StarWarsLocalImpl(
     }
 
     override suspend fun getCharacters(offset: Int): List<Character> {
+        Log.d(TAG, "getCharacters: offset:$offset")
         return characterDao.getCharacters(offset).map { it.mapToModel() }
     }
 
@@ -41,6 +42,7 @@ class StarWarsLocalImpl(
     }
 
     override fun getFavoriteCharacters(): Flow<List<Character>> {
+        Log.d(TAG, "getFavoriteCharacters")
         return characterDao.getFavoriteCharacters().map { it.map {
             entity -> entity.mapToModel()
         }}
@@ -49,21 +51,26 @@ class StarWarsLocalImpl(
     override suspend fun insertCharacter(character: List<Character>) {
         val characters = character.map { it.mapToEntity(it.filmInfo.ids) }
         characterDao.insertCharacter(*characters.toTypedArray())
+        Log.d(TAG, "inserted characters: ${characters.size}")
     }
 
     override suspend fun insertCharacter(character: Character) {
         characterDao.insertCharacter(character.mapToEntity(character.filmInfo.ids))
+        Log.d(TAG, "insertCharacter: id{${character.id}}")
     }
 
     override suspend fun isCharacterFavorite(id: Int): Boolean {
+        Log.d(TAG, "isCharacterFavorite: $id")
         return characterDao.isFavorite(id)
     }
 
     override suspend fun isCharacterCached(id: Int): Boolean {
+        Log.d(TAG, "isCharacterCached: $id")
         return characterDao.isCached(id)
     }
 
     override suspend fun getStarShips(offset: Int): List<StarShip> {
+        Log.d(TAG, "getStarShips: $offset")
         return starShipDao.getStarShips(offset).map { it.mapToModel() }
     }
 
@@ -78,31 +85,38 @@ class StarWarsLocalImpl(
     }
 
     override fun getFavoriteStarShips(): Flow<List<StarShip>> {
+        Log.d(TAG, "getFavoriteStarShips")
         return starShipDao.getFavoriteStarShips().map { it.map { entity -> entity.mapToModel() } }
     }
 
     override suspend fun insertStarShip(starShip: List<StarShip>) {
         starShipDao.insertStarShip(*starShip.map { it.mapToEntity(it.filmInfo.ids) }.toTypedArray())
+        Log.d(TAG, "inserted StarShips: ${starShip.size}")
     }
 
     override suspend fun insertStarShip(starShip: StarShip) {
         starShipDao.insertStarShip(starShip.mapToEntity(starShip.filmInfo.ids))
+        Log.d(TAG, "insertStarShip: id{${starShip.id}}")
     }
 
     override suspend fun isStarShipFavorite(id: Int): Boolean {
+        Log.d(TAG, "isStarShipFavorite: $id")
         return starShipDao.isFavorite(id)
     }
 
     override suspend fun isStarShipCached(id: Int): Boolean {
+        Log.d(TAG, "isStarShipCached: $id")
         return starShipDao.isCached(id)
     }
 
     override suspend fun getFilmById(id: Int): Film {
+        Log.d(TAG, "getFilmById: $id")
         return filmDao.getFilmById(id).mapToModel()
     }
 
     override suspend fun insertFilm(vararg film: Film) {
         filmDao.insertFilm(*film.map { it.mapToEntity() }.toTypedArray())
+        Log.d(TAG, "inserted Films: ${film.size}")
     }
 
     override suspend fun isFilmCached(id: Int): Boolean {
