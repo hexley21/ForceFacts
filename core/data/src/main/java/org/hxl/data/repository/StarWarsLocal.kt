@@ -6,6 +6,7 @@ import org.hxl.model.Film
 import org.hxl.model.StarShip
 
 interface StarWarsLocal {
+    suspend fun getCharacters(offset: Int): List<Character>
     suspend fun favoriteCharacter(id: Int)
     suspend fun unFavoriteCharacter(id: Int)
     fun getFavoriteCharacters(): Flow<List<Character>>
@@ -14,6 +15,7 @@ interface StarWarsLocal {
     suspend fun isCharacterFavorite(id: Int): Boolean
     suspend fun isCharacterCached(id: Int): Boolean
 
+    suspend fun getStarShips(offset: Int): List<StarShip>
     suspend fun favoriteStarShip(id: Int)
     suspend fun unFavoriteStarShip(id: Int)
     fun getFavoriteStarShips(): Flow<List<StarShip>>

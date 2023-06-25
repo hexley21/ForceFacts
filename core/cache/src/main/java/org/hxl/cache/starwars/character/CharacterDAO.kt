@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CharacterDAO {
 
+    @Query("SELECT * FROM character ORDER BY id ASC LIMIT 10 OFFSET :offset")
+    fun getCharacters(offset: Int) : List<CharacterEntity>
+
     @Query("SELECT * FROM character WHERE is_favorite = 1 ORDER BY id")
     fun getFavoriteCharacters() : Flow<List<CharacterEntity>>
 

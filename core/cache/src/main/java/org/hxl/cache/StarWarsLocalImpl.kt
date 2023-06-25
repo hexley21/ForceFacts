@@ -26,6 +26,10 @@ class StarWarsLocalImpl(
         const val TAG = "STAR_WARS_DB"
     }
 
+    override suspend fun getCharacters(offset: Int): List<Character> {
+        return characterDao.getCharacters(offset).map { it.mapToModel() }
+    }
+
     override suspend fun favoriteCharacter(id: Int) {
         characterDao.favoriteCharacter(id)
         Log.d(TAG, "favoriteCharacter: $id")
@@ -57,6 +61,10 @@ class StarWarsLocalImpl(
 
     override suspend fun isCharacterCached(id: Int): Boolean {
         return characterDao.isCached(id)
+    }
+
+    override suspend fun getStarShips(offset: Int): List<StarShip> {
+        return starShipDao.getStarShips(offset).map { it.mapToModel() }
     }
 
     override suspend fun favoriteStarShip(id: Int) {

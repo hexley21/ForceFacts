@@ -20,16 +20,20 @@ class StarWarsRepositoryImpl @Inject constructor(
     private val cachedStarShips: MutableList<Int> = mutableListOf()
 
     override suspend fun searchCharacters(query: String, page: Int): List<Character> {
-        val response: List<Character> = remote.searchCharacters(query, page)
-        response.map {
-            it.isFavorite = local.isCharacterFavorite(it.id)
+        val response: List<Character>
+        if (cachedCharacters.isNotEmpty() && query.isEmpty()) {
+            response = local.getCharacters((page - 1) * 10)
+        } else {
+            response = remote.searchCharacters(query, page)
+            response.map {
+                it.isFavorite = local.isCharacterFavorite(it.id)
 
-            if (it.id !in cachedCharacters) {
-                local.insertCharacter(it)
-                cachedCharacters.add(it.id)
+                if (it.id !in cachedCharacters) {
+                    local.insertCharacter(it)
+                    cachedCharacters.add(it.id)
+                }
             }
         }
-
         return response
     }
 
@@ -51,13 +55,19 @@ class StarWarsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun searchStarShips(query: String, page: Int): List<StarShip> {
-        val response: List<StarShip> = remote.searchStarShips(query, page)
-        response.map {
-            it.isFavorite = local.isStarShipFavorite(it.id)
+        val response: List<StarShip>
+        if (cachedStarShips.isNotEmpty() && query.isEmpty()) {
+            response = local.getStarShips((page - 1) * 10)
+        } else {
+            response = remote.searchStarShips(query, page)
 
-            if (it.id !in cachedStarShips) {
-                local.insertStarShip(it)
-                cachedStarShips.add(it.id)
+            response.map {
+                it.isFavorite = local.isStarShipFavorite(it.id)
+
+                if (it.id !in cachedStarShips) {
+                    local.insertStarShip(it)
+                    cachedStarShips.add(it.id)
+                }
             }
         }
         return response

@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface StarShipDAO {
 
+    @Query("SELECT * FROM star_ship ORDER BY id ASC LIMIT 10 OFFSET :offset")
+    fun getStarShips(offset: Int): List<StarShipEntity>
+
     @Query("SELECT * FROM star_ship where is_favorite = 1 ORDER BY id ASC")
     fun getFavoriteStarShips(): Flow<List<StarShipEntity>>
 
