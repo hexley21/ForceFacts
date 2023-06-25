@@ -18,6 +18,20 @@ android {
         versionName = "1.0-alpha.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunnerArguments.putAll(
+            mapOf(
+                "clearPackageData" to "true"
+            )
+        )
+    }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        animationsDisabled = true
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     buildFeatures {
@@ -27,10 +41,17 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
         }
     }
     compileOptions {
@@ -71,9 +92,28 @@ dependencies {
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
 
+    androidTestUtil(libs.test.orchestrator)
+    implementation(libs.espresso.idling)
+    testImplementation(libs.kotlinx.coroutines.test)
+
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+
     androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.test.runner)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.contrib)
+
+    androidTestImplementation(libs.mockito.core)
+    androidTestImplementation(libs.mockito.android)
+
+    androidTestImplementation(libs.dagger.hilt)
+    androidTestAnnotationProcessor(libs.dagger.hilt.compiler)
+
+    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation(libs.androidx.fragment.testing)
+
+    debugImplementation(libs.androidx.fragment.testing.manifest)
 }
 
 kapt {

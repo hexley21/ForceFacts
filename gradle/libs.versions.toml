@@ -32,6 +32,7 @@ junit = "4.13.2"
 junit-ext = "1.1.5"
 espresso-core = "3.5.1"
 test-runner = "1.5.2"
+orchestrator = "1.4.2"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -64,19 +65,22 @@ dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compi
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito-core" }
+mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockito-core" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 junit-ext = { group = "androidx.test.ext", name = "junit", version.ref = "junit-ext" }
 test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso-core" }
+espresso-idling = { module = "androidx.test.espresso:espresso-idling-resource", version.ref = "espresso-core" }
 roboelectric = { module = "org.robolectric:robolectric", version.ref = "roboelectric" }
-
+test-orchestrator = { module = "androidx.test:orchestrator", version.ref = "orchestrator" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

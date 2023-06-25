@@ -47,10 +47,10 @@ dependencies {
 
     testImplementation(libs.room.testing)
 
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.roboelectric)
     testImplementation(libs.junit)
     testImplementation(libs.junit.ext)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.roboelectric)
     testImplementation(libs.test.runner)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(project(":core:common-test"))

@@ -66,10 +66,25 @@ dependencies {
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
 
-    implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
+    implementation(libs.espresso.idling)
+
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+
     androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.test.runner)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.contrib)
+
+    androidTestImplementation(libs.mockito.core)
+    androidTestImplementation(libs.mockito.android)
+
+    androidTestImplementation(libs.dagger.hilt)
+    androidTestAnnotationProcessor(libs.dagger.hilt.compiler)
+
+    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation(libs.androidx.fragment.testing)
+
+    debugImplementation(libs.androidx.fragment.testing.manifest)
 }
