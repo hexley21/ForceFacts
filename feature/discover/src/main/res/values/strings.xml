@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="starships">Star ships: %d</string>
+
+    <string name="movies">Starred in:</string>
+    <string name="producer">Producers:</string>
+    <string name="director">Directors:</string>
+
+    <string name="manufacturer">Manufacturer: %s</string>
+    <string name="passengers">Passengers: %s</string>
+</resources>

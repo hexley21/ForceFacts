@@ -1,0 +1,22 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+plugins {
+    id("java-library")
+    alias(libs.plugins.org.jetbrains.kotlin.jvm)
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+dependencies {
+    implementation(project(":core:domain"))
+    implementation(project(":core:model"))
+
+    implementation(libs.javax.inject)
+    implementation(libs.kotlinx.coroutines)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+    implementation(project(":core:common-test"))
+}

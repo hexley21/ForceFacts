@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ForceFacts.Favorite" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/favorite_colors</item>
+        <item name="android:background">@drawable/favorite_background</item>
+    </style>
+
+</resources>

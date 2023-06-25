@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/view_navigator"
+            style="@style/CineScope.BottomNavigation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:backgroundTint="?attr/backgroundColor"
+            app:menu="@menu/navigator_menu" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/navigator_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:defaultNavHost="false"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:navGraph="@navigation/nav_relay" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="starship" type="org.hxl.model.StarShip" />
+
+        <variable name="film_info" type="org.hxl.model.FilmInfo" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/backgroundColor"
+        android:layout_marginTop="@dimen/distance_small"
+        android:layout_marginBottom="@dimen/distance_small"
+        app:contentPadding="@dimen/distance_default">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/distance_small"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:text='@{starship.name + ": " + starship.model}'
+                    tools:text="Name: model" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/manufacturer(starship.manufacturer)}"
+                    tools:text="Manufacturer: X"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/passengers(starship.passengers)}"
+                    tools:text="Passengers: 123"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_small"
+                    android:gravity="top"
+                    android:orientation="horizontal"
+                    android:visibility='@{film_info == null ? View.GONE : View.VISIBLE}'>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{@string/movies}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        tools:text="Starred in: " />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/distance_small"
+                        android:text='@{film_info.films}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        tools:text="123, 456, 678" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/distance_default"
+                    android:layout_marginTop="@dimen/distance_small"
+                    android:gravity="top"
+                    android:orientation="horizontal"
+                    android:visibility='@{film_info == null ? View.GONE : View.VISIBLE}'>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{@string/director}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        tools:text="Director:" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/distance_small"
+                        android:text='@{film_info.directors}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        tools:text="123, 456, 789" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/distance_default"
+                    android:layout_marginTop="@dimen/distance_small"
+                    android:gravity="top"
+                    android:orientation="horizontal"
+                    android:visibility='@{film_info == null ? View.GONE : View.VISIBLE}'>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{@string/producer}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        tools:text="Producer:" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/distance_small"
+                        android:text='@{film_info.producers}'
+                        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                        tools:text="123, 456, 789" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <CheckBox
+                android:checked="@{starship.isFavorite}"
+                android:id="@+id/cb_favorite"
+                style="@style/ForceFacts.Favorite"
+                android:layout_width="@dimen/icon_default"
+                android:layout_height="match_parent"
+                android:button="@drawable/sl_favorite" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
