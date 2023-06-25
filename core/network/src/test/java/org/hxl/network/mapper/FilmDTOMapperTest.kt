@@ -28,8 +28,8 @@ class FilmDTOMapperTest {
     )
 
     private val fakeModel = Film(
+        1,
         title = "A New Hope",
-        episodeId = 4,
         director = "George Lucas",
         producer = "Gary Kurtz, Rick McCallum"
     )
@@ -39,8 +39,8 @@ class FilmDTOMapperTest {
         // Act
         val converted = fakeDTO.mapToModel()
         // Assert
+        assertEquals(fakeModel.id, converted.id)
         assertEquals(fakeModel.title, converted.title)
-        assertEquals(fakeModel.episodeId, converted.episodeId)
         assertEquals(fakeModel.director, converted.director)
         assertEquals(fakeModel.producer, converted.producer)
     }

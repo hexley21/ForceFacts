@@ -41,7 +41,9 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
+
     implementation(project(":feature:discover"))
+    implementation(project(":feature:favorite"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
@@ -57,6 +59,6 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.junit.ext)
     androidTestImplementation(libs.espresso.core)
 }

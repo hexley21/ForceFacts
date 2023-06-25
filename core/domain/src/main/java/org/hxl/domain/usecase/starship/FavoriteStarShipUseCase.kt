@@ -1,17 +1,23 @@
 package org.hxl.domain.usecase.starship
 
+import kotlinx.coroutines.flow.Flow
 import org.hxl.domain.repository.StarWarsRepository
+import org.hxl.domain.usecase.FavoriteUseCase
 import org.hxl.model.StarShip
 import javax.inject.Inject
 
-class FavoriteStarShipUseCase @Inject constructor(private val repository: StarWarsRepository) {
-    suspend fun favoriteStarShip(id: String) {
+class FavoriteStarShipUseCase @Inject constructor(private val repository: StarWarsRepository): FavoriteUseCase<StarShip> {
+    override suspend fun favorite(id: Int) {
         return repository.favoriteStarShip(id)
     }
-    suspend fun unFavoriteStarShip(id: String) {
+
+    override suspend fun unFavorite(id: Int) {
         return repository.unFavoriteStarShip(id)
+
     }
-    suspend fun getFavoriteStarShips(): List<StarShip> {
+
+    override fun getFavorites(): Flow<List<StarShip>> {
         return repository.getFavoriteStarShips()
+
     }
 }

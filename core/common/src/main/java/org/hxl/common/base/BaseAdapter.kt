@@ -16,4 +16,5 @@ abstract class BaseAdapter<T, VH>(comparator: DiffUtil.ItemCallback<T>): ListAda
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.accept(getItem(position))
     }
+
 }

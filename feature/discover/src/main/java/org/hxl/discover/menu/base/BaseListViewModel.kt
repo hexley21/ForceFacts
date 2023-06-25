@@ -1,21 +1,35 @@
-package org.hxl.discover.menu
+package org.hxl.discover.menu.base
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.hxl.discover.menu.ListDataPaging
+import org.hxl.domain.usecase.FavoriteUseCase
+import org.hxl.domain.usecase.ModelUseCase
 
-abstract class BaseListViewModel<T: Any>(private val getData: suspend (query: String, page: Int) -> List<T>): ViewModel() {
+abstract class BaseListViewModel<T: Any>(
+    private val modelUseCase: ModelUseCase<T>,
+    private val favoriteUseCase: FavoriteUseCase<T>,
+): ViewModel() {
     private var searchQuery: String = ""
     private var pager: Pager<Int, T>? = null
 
     private val searchQueryFlow = MutableStateFlow("")
+
+    companion object {
+        const val TAG = "DiscoverListVM"
+    }
 
     var listFlow: Flow<PagingData<T>>? = null
         get() {
@@ -34,7 +48,9 @@ abstract class BaseListViewModel<T: Any>(private val getData: suspend (query: St
                 )
             ) {
                 ListDataPaging {
-                    getData(searchQuery, it)
+                    withContext(Dispatchers.IO) {
+                        modelUseCase.search(searchQuery, it)
+                    }
                 }
             }
         }
@@ -52,5 +68,19 @@ abstract class BaseListViewModel<T: Any>(private val getData: suspend (query: St
     fun submitSearch(query: String) {
         searchQueryFlow.value = query
         updateListFlow()
+    }
+
+    fun favorite(isAdd: Boolean, id: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                if (isAdd) {
+                    favoriteUseCase.favorite(id)
+                    Log.d(TAG, "favorite: $id")
+                } else {
+                    favoriteUseCase.unFavorite(id)
+                    Log.d(TAG, "unFavorite: $id")
+                }
+            }
+        }
     }
 }
