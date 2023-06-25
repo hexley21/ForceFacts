@@ -1,5 +1,6 @@
 package org.hxl.cache
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.hxl.cache.starwars.character.CharacterDAO
@@ -15,6 +16,7 @@ import org.hxl.data.repository.StarWarsLocal
 import org.hxl.model.Character
 import org.hxl.model.Film
 import org.hxl.model.StarShip
+import kotlin.math.log
 
 class StarWarsLocalImpl(
     private val characterDao: CharacterDAO,
@@ -27,10 +29,12 @@ class StarWarsLocalImpl(
 
     override suspend fun favoriteCharacter(id: Int) {
         characterDao.favoriteCharacter(id)
+        Log.d(TAG, "favoriteCharacter: $id")
     }
 
     override suspend fun unFavoriteCharacter(id: Int) {
-        characterDao.favoriteCharacter(id)
+        characterDao.unFavoriteCharacter(id)
+        Log.d(TAG, "unFavoriteCharacter: $id")
     }
 
     override fun getFavoriteCharacters(): Flow<List<Character>> {
@@ -58,10 +62,12 @@ class StarWarsLocalImpl(
 
     override suspend fun favoriteStarShip(id: Int) {
         starShipDao.favoriteStarShip(id)
+        Log.d(TAG, "favoriteStarShip: $id")
     }
 
     override suspend fun unFavoriteStarShip(id: Int) {
         starShipDao.unFavoriteStarShip(id)
+        Log.d(TAG, "unFavoriteStarShip: $id")
     }
 
     override fun getFavoriteStarShips(): Flow<List<StarShip>> {

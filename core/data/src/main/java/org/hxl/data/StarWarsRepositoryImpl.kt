@@ -55,7 +55,6 @@ class StarWarsRepositoryImpl @Inject constructor(
         response.map {
             it.isFavorite = local.isStarShipFavorite(it.id)
 
-            it.films.forEach { film -> getFilm(film) }
             if (it.id !in cachedStarShips) {
                 local.insertStarShip(it)
                 cachedStarShips.add(it.id)
@@ -63,6 +62,20 @@ class StarWarsRepositoryImpl @Inject constructor(
         }
         return response
     }
+
+//    override suspend fun searchCharacters(query: String, page: Int): List<Character> {
+//        val response: List<Character> = remote.searchCharacters(query, page)
+//        response.map {
+//            it.isFavorite = local.isCharacterFavorite(it.id)
+//
+//            if (it.id !in cachedCharacters) {
+//                local.insertCharacter(it)
+//                cachedCharacters.add(it.id)
+//            }
+//        }
+//
+//        return response
+//    }
 
     override suspend fun favoriteStarShip(id: Int) {
         local.favoriteStarShip(id)

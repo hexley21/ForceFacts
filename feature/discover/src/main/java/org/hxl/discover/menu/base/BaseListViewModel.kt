@@ -1,5 +1,6 @@
 package org.hxl.discover.menu.base
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -25,6 +26,10 @@ abstract class BaseListViewModel<T: Any>(
     private var pager: Pager<Int, T>? = null
 
     private val searchQueryFlow = MutableStateFlow("")
+
+    companion object {
+        const val TAG = "DiscoverListVM"
+    }
 
     var listFlow: Flow<PagingData<T>>? = null
         get() {
@@ -70,8 +75,10 @@ abstract class BaseListViewModel<T: Any>(
             withContext(Dispatchers.IO) {
                 if (isAdd) {
                     favoriteUseCase.favorite(id)
+                    Log.d(TAG, "favorite: $id")
                 } else {
                     favoriteUseCase.unFavorite(id)
+                    Log.d(TAG, "unFavorite: $id")
                 }
             }
         }

@@ -13,10 +13,10 @@ interface StarShipDAO {
     fun getFavoriteStarShips(): Flow<List<StarShipEntity>>
 
     @Query("UPDATE star_ship SET is_favorite = 1 WHERE id = :id")
-    suspend fun favoriteStarShip(id: Int): Int
+    fun favoriteStarShip(id: Int): Int
 
     @Query("UPDATE star_ship SET is_favorite = 0 WHERE id = :id")
-    suspend fun unFavoriteStarShip(id: Int): Int
+    fun unFavoriteStarShip(id: Int): Int
 
     @Query("SELECT EXISTS(SELECT 1 FROM star_ship where id == :id AND is_favorite == 1)")
     fun isFavorite(id: Int): Boolean

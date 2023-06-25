@@ -11,7 +11,7 @@ class StarShipViewHolder(
     override fun accept(t: StarShip) {
         binding.starship = t
         binding.cbFavorite.setOnCheckedChangeListener { _, isChecked ->
-            favLogic(!isChecked, t.id)
+            favLogic(isChecked, t.id)
         }
     }
 
