@@ -6,7 +6,6 @@ import org.hxl.common.base.BaseAdapter
 import org.hxl.common.callback.StarShipItemCallback
 import org.hxl.discover.databinding.StarshipItemBinding
 import org.hxl.discover.menu.starship.adapter.StarShipViewHolder
-import org.hxl.model.FilmInfo
 import org.hxl.model.StarShip
 
 class StarShipFavAdapter(
@@ -19,5 +18,6 @@ class StarShipFavAdapter(
 
     override fun onBindViewHolder(holder: StarShipViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
+        holder.binding.filmInfo = getItem(position).filmInfo
     }
 }

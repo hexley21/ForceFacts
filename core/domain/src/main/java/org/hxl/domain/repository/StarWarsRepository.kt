@@ -2,7 +2,6 @@ package org.hxl.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 import org.hxl.model.Character
-import org.hxl.model.Film
 import org.hxl.model.FilmInfo
 import org.hxl.model.StarShip
 

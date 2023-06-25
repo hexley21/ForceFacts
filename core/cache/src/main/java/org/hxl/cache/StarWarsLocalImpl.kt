@@ -16,7 +16,6 @@ import org.hxl.data.repository.StarWarsLocal
 import org.hxl.model.Character
 import org.hxl.model.Film
 import org.hxl.model.StarShip
-import kotlin.math.log
 
 class StarWarsLocalImpl(
     private val characterDao: CharacterDAO,
@@ -75,11 +74,11 @@ class StarWarsLocalImpl(
     }
 
     override suspend fun insertStarShip(starShip: List<StarShip>) {
-        starShipDao.insertStarShip(*starShip.map { it.mapToEntity() }.toTypedArray())
+        starShipDao.insertStarShip(*starShip.map { it.mapToEntity(it.filmInfo.ids) }.toTypedArray())
     }
 
     override suspend fun insertStarShip(starShip: StarShip) {
-        starShipDao.insertStarShip(starShip.mapToEntity())
+        starShipDao.insertStarShip(starShip.mapToEntity(starShip.filmInfo.ids))
     }
 
     override suspend fun isStarShipFavorite(id: Int): Boolean {

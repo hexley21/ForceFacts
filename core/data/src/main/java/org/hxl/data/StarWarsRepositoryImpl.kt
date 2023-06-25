@@ -42,8 +42,8 @@ class StarWarsRepositoryImpl @Inject constructor(
     }
 
     override fun getFavoriteCharacters(): Flow<List<Character>> {
-        return local.getFavoriteCharacters().map { characters ->
-            characters.onEach { character ->
+        return local.getFavoriteCharacters().map {
+            it.onEach { character ->
                 val updatedFilmInfo = getFilmInfo(character.filmInfo.ids)
                 character.filmInfo = updatedFilmInfo
             }
@@ -63,20 +63,6 @@ class StarWarsRepositoryImpl @Inject constructor(
         return response
     }
 
-//    override suspend fun searchCharacters(query: String, page: Int): List<Character> {
-//        val response: List<Character> = remote.searchCharacters(query, page)
-//        response.map {
-//            it.isFavorite = local.isCharacterFavorite(it.id)
-//
-//            if (it.id !in cachedCharacters) {
-//                local.insertCharacter(it)
-//                cachedCharacters.add(it.id)
-//            }
-//        }
-//
-//        return response
-//    }
-
     override suspend fun favoriteStarShip(id: Int) {
         local.favoriteStarShip(id)
     }
@@ -86,7 +72,12 @@ class StarWarsRepositoryImpl @Inject constructor(
     }
 
     override fun getFavoriteStarShips(): Flow<List<StarShip>> {
-        return local.getFavoriteStarShips()
+        return local.getFavoriteStarShips().map {
+            it.onEach { starShip ->
+                val updatedFilmInfo = getFilmInfo(starShip.filmInfo.ids)
+                starShip.filmInfo = updatedFilmInfo
+            }
+        }
     }
 
     override suspend fun getFilmInfo(id: List<Int>): FilmInfo {

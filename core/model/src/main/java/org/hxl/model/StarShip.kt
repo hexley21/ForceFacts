@@ -7,5 +7,5 @@ data class StarShip(
     val manufacturer: String,
     val passengers: String,
     var isFavorite: Boolean = false,
-    val films: List<Int> = emptyList()
+    var filmInfo: FilmInfo = FilmInfo()
 )

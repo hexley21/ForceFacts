@@ -8,8 +8,6 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.hxl.domain.usecase.FavoriteUseCase
-import org.hxl.domain.usecase.FilmInfoUseCase
-import org.hxl.model.FilmInfo
 
 abstract class BaseFavViewModel<T: Any>(
     private val favoriteUseCase: FavoriteUseCase<T>
