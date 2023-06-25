@@ -3,6 +3,7 @@ package org.hxl.favorite.menu.base
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.hxl.common.base.BaseAdapter
@@ -18,25 +19,16 @@ abstract class BaseFavFragment<T: Any, VM: BaseFavViewModel<T>>: BaseFragmentVM<
         binding.rvStarwarsList.adapter = listAdapter
 
         lifecycleScope.launch {
-//            listAdapter.addLoadStateListener{
-//                if (it.refresh is LoadState.Loading) {
-//                    if (binding.pbMiddle.visibility == View.GONE) {
-//                        binding.pbTop.visibility = View.VISIBLE
-//                    }
-////                    EspressoIdlingResource.increment();
-//                }
-//                else if (it.refresh is LoadState.NotLoading) {
-//
-//                    hideError()
-//                    hideLoading()
-////                    EspressoIdlingResource.decrement();
-//                } else if (it.refresh is LoadState.Error) {
-//                    showError((it.refresh as LoadState.Error).error)
-//                    hideLoading()
-//                }
-//            }
+            listAdapter.registerAdapterDataObserver(
+                object: RecyclerView.AdapterDataObserver() {
+
+                }
+            )
             vm.listFlow.collectLatest {
-                listAdapter.submitList(it)
+                listAdapter.submitList(it) {
+                    hideError()
+                    hideLoading()
+                }
             }
         }
 
@@ -46,13 +38,15 @@ abstract class BaseFavFragment<T: Any, VM: BaseFavViewModel<T>>: BaseFragmentVM<
         binding.srlStarwars.setOnRefreshListener(::refresh)
 
     }
+
     private fun refresh() {
+        hideLoading()
     }
 
     private fun hideError() {
+        hideLoading()
         binding.imgError.visibility = View.GONE
         binding.tvError.visibility = View.GONE
-        binding.srlStarwars.isRefreshing = false
     }
 
     private fun showError(e: Throwable) {
@@ -78,5 +72,6 @@ abstract class BaseFavFragment<T: Any, VM: BaseFavViewModel<T>>: BaseFragmentVM<
     private fun hideLoading() {
         binding.pbTop.visibility = View.GONE
         binding.pbMiddle.visibility = View.GONE
+        binding.srlStarwars.isRefreshing = false
     }
 }

@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:text='@{@string/movies}'
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                        tools:text="Movies: " />
+                        tools:text="Starred in: " />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -71,6 +71,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/distance_default"
                     android:layout_marginTop="@dimen/distance_small"
                     android:gravity="top"
                     android:orientation="horizontal"
@@ -96,6 +97,7 @@
                     android:layout_width="match_parent"
 
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/distance_default"
                     android:layout_marginTop="@dimen/distance_small"
                     android:gravity="top"
                     android:orientation="horizontal"

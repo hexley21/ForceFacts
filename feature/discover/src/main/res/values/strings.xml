@@ -2,7 +2,7 @@
 <resources>
     <string name="starships">Star ships: %d</string>
 
-    <string name="movies">Movies:</string>
+    <string name="movies">Starred in:</string>
     <string name="producer">Producers:</string>
     <string name="director">Directors:</string>
 
