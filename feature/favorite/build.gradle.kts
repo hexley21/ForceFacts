@@ -93,6 +93,4 @@ dependencies {
 
     androidTestImplementation(libs.dagger.hilt.testing)
     kaptAndroidTest(libs.dagger.hilt.compiler)
-
-    debugImplementation(libs.androidx.fragment.testing.manifest)
 }

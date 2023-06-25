@@ -94,6 +94,4 @@ dependencies {
 
     androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(libs.androidx.fragment.testing)
-
-    debugImplementation(libs.androidx.fragment.testing.manifest)
 }

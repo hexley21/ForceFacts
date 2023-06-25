@@ -89,8 +89,5 @@ dependencies {
     androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(libs.androidx.fragment.testing)
 
-    debugImplementation(libs.androidx.fragment.testing.manifest)
     androidTestImplementation(project(":core:common"))
-    androidTestImplementation(project(":feature:discover"))
-    androidTestImplementation(project(":feature:favorite"))
 }
