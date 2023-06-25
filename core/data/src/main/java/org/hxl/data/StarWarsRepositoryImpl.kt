@@ -9,9 +9,8 @@ import org.hxl.model.Character
 import org.hxl.model.Film
 import org.hxl.model.FilmInfo
 import org.hxl.model.StarShip
-import javax.inject.Inject
 
-class StarWarsRepositoryImpl @Inject constructor(
+class StarWarsRepositoryImpl(
     private val remote: StarWarsRemote,
     private val local: StarWarsLocal
 ): StarWarsRepository {

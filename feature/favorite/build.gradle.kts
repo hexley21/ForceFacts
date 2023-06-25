@@ -13,12 +13,20 @@ android {
     defaultConfig {
         minSdk = 24
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "org.hxl.common.test_conf.AppTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
     buildFeatures {
         dataBinding = true
+    }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        animationsDisabled = true
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     buildTypes {
@@ -80,11 +88,11 @@ dependencies {
     androidTestImplementation(libs.mockito.core)
     androidTestImplementation(libs.mockito.android)
 
-    androidTestImplementation(libs.dagger.hilt)
-    androidTestAnnotationProcessor(libs.dagger.hilt.compiler)
+    testImplementation(libs.dagger.hilt.testing)
+    kaptTest(libs.dagger.hilt.compiler)
 
-    androidTestImplementation(libs.androidx.navigation.testing)
-    androidTestImplementation(libs.androidx.fragment.testing)
+    androidTestImplementation(libs.dagger.hilt.testing)
+    kaptAndroidTest(libs.dagger.hilt.compiler)
 
     debugImplementation(libs.androidx.fragment.testing.manifest)
 }

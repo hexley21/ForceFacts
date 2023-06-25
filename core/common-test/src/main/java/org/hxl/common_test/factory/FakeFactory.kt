@@ -1,6 +1,5 @@
 package org.hxl.common_test.factory
 
-import org.hxl.common_test.TestConstants
 import org.hxl.common_test.TestConstants.LIST_SIZE
 import org.hxl.model.Film
 import org.hxl.model.FilmInfo
@@ -11,11 +10,11 @@ import kotlin.random.Random
 
 object FakeFactory {
     inline fun <reified T> createList(generation: () -> T): List<T> {
-        return List(TestConstants.LIST_SIZE) { generation() }
+        return List(LIST_SIZE) { generation() }
     }
 
     inline fun <reified T> createArray(generation: () -> T): Array<T> where T: Any{
-        return Array(TestConstants.LIST_SIZE) { generation() }
+        return Array(LIST_SIZE) { generation() }
     }
 
     fun createCharacter(): Character {

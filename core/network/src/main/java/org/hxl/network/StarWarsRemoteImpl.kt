@@ -6,9 +6,8 @@ import org.hxl.model.Film
 import org.hxl.model.StarShip
 import org.hxl.network.api.StarWarsService
 import org.hxl.network.mapper.mapToModel
-import javax.inject.Inject
 
-class StarWarsRemoteImpl @Inject constructor(private val service: StarWarsService): StarWarsRemote {
+class StarWarsRemoteImpl(private val service: StarWarsService): StarWarsRemote {
     override suspend fun getCharacters(page: Int): List<Character> {
         return service.getCharacters(page).results.map { it.mapToModel() }
     }

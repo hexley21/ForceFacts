@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0-alpha.1"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "org.hxl.common.test_conf.AppTestRunner"
 
         testInstrumentationRunnerArguments.putAll(
             mapOf(
@@ -25,7 +25,6 @@ android {
             )
         )
     }
-
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
         animationsDisabled = true
@@ -107,8 +106,11 @@ dependencies {
     androidTestImplementation(libs.mockito.core)
     androidTestImplementation(libs.mockito.android)
 
-    androidTestImplementation(libs.dagger.hilt)
-    androidTestAnnotationProcessor(libs.dagger.hilt.compiler)
+    testImplementation(libs.dagger.hilt.testing)
+    kaptTest(libs.dagger.hilt.compiler)
+
+    androidTestImplementation(libs.dagger.hilt.testing)
+    kaptAndroidTest(libs.dagger.hilt.compiler)
 
     androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(libs.androidx.fragment.testing)
