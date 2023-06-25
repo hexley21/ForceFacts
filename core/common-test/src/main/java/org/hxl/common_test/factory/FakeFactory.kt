@@ -1,6 +1,7 @@
 package org.hxl.common_test.factory
 
 import org.hxl.common_test.TestConstants
+import org.hxl.common_test.TestConstants.LIST_SIZE
 import org.hxl.model.Film
 import org.hxl.model.FilmInfo
 import org.hxl.model.StarShip
@@ -47,9 +48,9 @@ object FakeFactory {
         )
     }
 
-    fun createFilmInfo(): FilmInfo {
+    private fun createFilmInfo(): FilmInfo {
         return FilmInfo(
-            ids = (1..3).map { Random.nextInt() },
+            ids = List(LIST_SIZE) { Random.nextInt() },
             films = UUID.randomUUID().toString(),
             directors = UUID.randomUUID().toString(),
             producers = UUID.randomUUID().toString()

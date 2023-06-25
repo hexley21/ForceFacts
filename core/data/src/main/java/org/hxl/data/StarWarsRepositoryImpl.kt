@@ -15,7 +15,6 @@ class StarWarsRepositoryImpl @Inject constructor(
     private val remote: StarWarsRemote,
     private val local: StarWarsLocal
 ): StarWarsRepository {
-
     private val cachedCharacters: MutableList<Int> = mutableListOf()
     private val cachedStarShips: MutableList<Int> = mutableListOf()
 
@@ -56,8 +55,7 @@ class StarWarsRepositoryImpl @Inject constructor(
     override fun getFavoriteCharacters(): Flow<List<Character>> {
         return local.getFavoriteCharacters().map {
             it.onEach { character ->
-                val updatedFilmInfo = getFilmInfo(character.filmInfo.ids)
-                character.filmInfo = updatedFilmInfo
+                character.filmInfo = getFilmInfo(character.filmInfo.ids)
             }
         }
     }
@@ -78,7 +76,7 @@ class StarWarsRepositoryImpl @Inject constructor(
     private suspend fun getStarShipsRemote(query: String, page: Int): List<StarShip> {
         val response: List<StarShip> = remote.searchStarShips(query, page)
         response.map {
-            it.isFavorite = local.isCharacterFavorite(it.id)
+            it.isFavorite = local.isStarShipFavorite(it.id)
 
             if (it.id !in cachedStarShips) {
                 local.insertStarShip(it)
@@ -99,8 +97,7 @@ class StarWarsRepositoryImpl @Inject constructor(
     override fun getFavoriteStarShips(): Flow<List<StarShip>> {
         return local.getFavoriteStarShips().map {
             it.onEach { starShip ->
-                val updatedFilmInfo = getFilmInfo(starShip.filmInfo.ids)
-                starShip.filmInfo = updatedFilmInfo
+                starShip.filmInfo = getFilmInfo(starShip.filmInfo.ids)
             }
         }
     }
