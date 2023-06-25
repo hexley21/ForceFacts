@@ -120,7 +120,7 @@ class StarWarsLocalImpl(
     }
 
     override suspend fun isFilmCached(id: Int): Boolean {
-        Log.d(TAG, "isFilmCached: ${id}")
+        Log.d(TAG, "isFilmCached: {$id}")
         return filmDao.isCached(id)
     }
 }
