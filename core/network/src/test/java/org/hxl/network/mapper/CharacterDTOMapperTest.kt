@@ -2,6 +2,7 @@ package org.hxl.network.mapper
 
 import junit.framework.TestCase
 import org.hxl.model.Character
+import org.hxl.model.FilmInfo
 import org.hxl.network.model.CharacterDTO
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,7 +35,8 @@ class CharacterDTOMapperTest {
         name = "Luke Skywalker",
         gender = "Male",
         starships = 2,
-        films = listOf(1, 2, 3)
+        false,
+        FilmInfo(listOf(1, 2, 3))
     )
 
     @Test
@@ -46,7 +48,7 @@ class CharacterDTOMapperTest {
         TestCase.assertEquals(fakeModel.name, converted.name)
         TestCase.assertEquals(fakeModel.gender, converted.gender)
         TestCase.assertEquals(fakeModel.starships, converted.starships)
-        TestCase.assertEquals(fakeModel.films, converted.films)
+        TestCase.assertEquals(fakeModel.filmInfo.ids, converted.filmInfo.ids)
     }
 
 }

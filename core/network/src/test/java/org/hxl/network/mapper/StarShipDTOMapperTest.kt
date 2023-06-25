@@ -1,6 +1,7 @@
 package org.hxl.network.mapper
 
 import junit.framework.TestCase.assertEquals
+import org.hxl.model.FilmInfo
 import org.hxl.model.StarShip
 import org.hxl.network.model.StarShipDTO
 import org.junit.Test
@@ -38,7 +39,7 @@ class StarShipDTOMapperTest {
         manufacturer = "Corellian Engineering Corporation",
         passengers = "6.0",
         false,
-        listOf(1, 2, 3)
+        FilmInfo(listOf(1, 2, 3))
     )
 
     @Test
@@ -52,7 +53,7 @@ class StarShipDTOMapperTest {
         assertEquals(fakeModel.manufacturer, converted.manufacturer)
         assertEquals(fakeModel.passengers, converted.passengers)
         assertEquals(false, converted.isFavorite)
-        assertEquals(fakeModel.films, converted.films)
+        assertEquals(fakeModel.filmInfo.ids, converted.filmInfo.ids)
     }
 
 }
