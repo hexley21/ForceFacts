@@ -9,6 +9,9 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
 import org.hxl.common.base.BaseFragment
+import org.hxl.navigator.R.id.menu_favorites
+import org.hxl.favorite.R.id.nav_favorite
+import org.hxl.discover.R.id.nav_discover
 import org.hxl.navigator.databinding.FragmentNavigatorBinding
 
 @AndroidEntryPoint
@@ -29,11 +32,11 @@ class NavigatorFragment: BaseFragment<FragmentNavigatorBinding>() {
 
     private fun onMenuItemSelect(id: Int): Boolean {
         when (id) {
-            R.id.menu_favorites -> {
-                findNavController().navigate(org.hxl.favorite.R.id.nav_favorite)
+            menu_favorites -> {
+                findNavController().navigate(nav_favorite)
             }
             else -> {
-                findNavController().navigate(org.hxl.discover.R.id.nav_discover)
+                findNavController().navigate(nav_discover)
             }
         }
         return true

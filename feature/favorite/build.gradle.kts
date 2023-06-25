@@ -13,12 +13,20 @@ android {
     defaultConfig {
         minSdk = 24
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "org.hxl.common.test_conf.AppTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
     buildFeatures {
         dataBinding = true
+    }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        animationsDisabled = true
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     buildTypes {
@@ -66,10 +74,23 @@ dependencies {
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
 
-    implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
+    implementation(libs.espresso.idling)
+
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+
     androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.test.runner)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.contrib)
+
+    androidTestImplementation(libs.mockito.core)
+    androidTestImplementation(libs.mockito.android)
+
+    testImplementation(libs.dagger.hilt.testing)
+    kaptTest(libs.dagger.hilt.compiler)
+
+    androidTestImplementation(libs.dagger.hilt.testing)
+    kaptAndroidTest(libs.dagger.hilt.compiler)
 }

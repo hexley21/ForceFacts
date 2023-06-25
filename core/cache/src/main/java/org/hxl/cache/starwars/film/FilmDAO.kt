@@ -13,5 +13,5 @@ interface FilmDAO {
     @Query("SELECT EXISTS(SELECT 1 FROM film where id == :id)")
     fun isCached(id: Int): Boolean
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFilm(vararg filmEntity: FilmEntity)
+    fun insertFilm(vararg filmEntity: FilmEntity)
 }

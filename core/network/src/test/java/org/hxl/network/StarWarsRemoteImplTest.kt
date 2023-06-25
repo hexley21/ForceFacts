@@ -7,10 +7,10 @@ import org.hxl.common_test.TestConstants.ID
 import org.hxl.common_test.TestConstants.LIST_SIZE
 import org.hxl.common_test.TestConstants.PAGE
 import org.hxl.common_test.TestConstants.QUERY
-import org.hxl.common_test.factory.FakeNetworkFactory.createCharacterDTO
-import org.hxl.common_test.factory.FakeNetworkFactory.createFilmDTO
-import org.hxl.common_test.factory.FakeNetworkFactory.createList
-import org.hxl.common_test.factory.FakeNetworkFactory.createStarShipDTO
+import org.hxl.network.mapper.FakeNetworkFactory.createCharacterDTO
+import org.hxl.network.mapper.FakeNetworkFactory.createFilmDTO
+import org.hxl.network.mapper.FakeNetworkFactory.createList
+import org.hxl.network.mapper.FakeNetworkFactory.createStarShipDTO
 import org.hxl.model.Character
 import org.hxl.model.Film
 import org.hxl.model.StarShip

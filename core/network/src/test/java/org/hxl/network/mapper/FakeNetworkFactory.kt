@@ -1,4 +1,4 @@
-package org.hxl.common_test.factory
+package org.hxl.network.mapper
 
 import org.hxl.common_test.TestConstants.LIST_SIZE
 import org.hxl.network.model.CharacterDTO

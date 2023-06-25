@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -45,9 +46,17 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
 
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
+    implementation(libs.dagger.hilt.testing)
+
+    implementation(libs.junit)
+
+    implementation(libs.junit.ext)
+    implementation(libs.test.runner)
+
     implementation(libs.androidx.paging.runtime)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.junit.ext)
-    androidTestImplementation(libs.espresso.core)
+    implementation(libs.androidx.navigation.testing)
+    implementation(libs.androidx.fragment.testing)
 }

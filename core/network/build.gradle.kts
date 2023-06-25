@@ -20,8 +20,8 @@ dependencies {
     implementation(libs.moshi.kotlin)
     implementation(libs.logging.interceptor)
 
-    testImplementation(libs.mockito.core)
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(project(":core:common-test"))
 }
